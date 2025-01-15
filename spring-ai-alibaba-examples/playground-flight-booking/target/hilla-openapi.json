@@ -1,0 +1,146 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Hilla Application",
+    "version" : "1.0.0"
+  },
+  "servers" : [
+    {
+      "url" : "http://localhost:8080/connect",
+      "description" : "Hilla Backend"
+    }
+  ],
+  "tags" : [
+    {
+      "name" : "AssistantService",
+      "x-class-name" : "ai.spring.demo.ai.playground.client.AssistantService"
+    },
+    {
+      "name" : "BookingService",
+      "x-class-name" : "ai.spring.demo.ai.playground.client.BookingService"
+    }
+  ],
+  "paths" : {
+    "/AssistantService/chat" : {
+      "post" : {
+        "tags" : [
+          "AssistantService"
+        ],
+        "operationId" : "AssistantService_chat_POST",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "chatId" : {
+                    "type" : "string",
+                    "x-java-type" : "java.lang.String"
+                  },
+                  "userMessage" : {
+                    "type" : "string",
+                    "x-java-type" : "java.lang.String"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string",
+                    "x-java-type" : "java.lang.String"
+                  },
+                  "x-class-name" : "com.vaadin.hilla.runtime.transfertypes.Flux"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/BookingService/getBookings" : {
+      "post" : {
+        "tags" : [
+          "BookingService"
+        ],
+        "operationId" : "BookingService_getBookings_POST",
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "anyOf" : [
+                      {
+                        "$ref" : "#/components/schemas/ai.spring.demo.ai.playground.services.BookingTools$BookingDetails"
+                      }
+                    ]
+                  },
+                  "x-java-type" : "java.util.List"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "ai.spring.demo.ai.playground.services.BookingTools$BookingDetails" : {
+        "type" : "object",
+        "properties" : {
+          "bookingNumber" : {
+            "type" : "string",
+            "x-java-type" : "java.lang.String"
+          },
+          "name" : {
+            "type" : "string",
+            "x-java-type" : "java.lang.String"
+          },
+          "date" : {
+            "type" : "string",
+            "format" : "date",
+            "x-java-type" : "java.time.LocalDate"
+          },
+          "bookingStatus" : {
+            "anyOf" : [
+              {
+                "$ref" : "#/components/schemas/ai.spring.demo.ai.playground.data.BookingStatus"
+              }
+            ]
+          },
+          "from" : {
+            "type" : "string",
+            "x-java-type" : "java.lang.String"
+          },
+          "to" : {
+            "type" : "string",
+            "x-java-type" : "java.lang.String"
+          },
+          "bookingClass" : {
+            "type" : "string",
+            "x-java-type" : "java.lang.String"
+          }
+        }
+      },
+      "ai.spring.demo.ai.playground.data.BookingStatus" : {
+        "type" : "string",
+        "enum" : [
+          "CONFIRMED",
+          "COMPLETED",
+          "CANCELLED"
+        ]
+      }
+    }
+  }
+}

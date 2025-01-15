@@ -1,0 +1,17 @@
+{
+  "frontendFolder": "/Users/coderpwh/workSpace/spring-ai-alibaba/spring-ai-alibaba-examples/playground-flight-booking/./frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "/Users/coderpwh/workSpace/spring-ai-alibaba/spring-ai-alibaba-examples/playground-flight-booking/./frontend/generated/jar-resources",
+  "staticOutput": "/Users/coderpwh/workSpace/spring-ai-alibaba/spring-ai-alibaba-examples/playground-flight-booking/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "statsOutput": "/Users/coderpwh/workSpace/spring-ai-alibaba/spring-ai-alibaba-examples/playground-flight-booking/target/classes/META-INF/VAADIN/config",
+  "frontendBundleOutput": "/Users/coderpwh/workSpace/spring-ai-alibaba/spring-ai-alibaba-examples/playground-flight-booking/target/classes/META-INF/VAADIN/webapp",
+  "devBundleOutput": "/Users/coderpwh/workSpace/spring-ai-alibaba/spring-ai-alibaba-examples/playground-flight-booking/target/dev-bundle/webapp",
+  "devBundleStatsOutput": "/Users/coderpwh/workSpace/spring-ai-alibaba/spring-ai-alibaba-examples/playground-flight-booking/target/dev-bundle/config",
+  "jarResourcesFolder": "/Users/coderpwh/workSpace/spring-ai-alibaba/spring-ai-alibaba-examples/playground-flight-booking/./frontend/generated/jar-resources",
+  "themeName": "customer-support-agent",
+  "clientServiceWorkerSource": "/Users/coderpwh/workSpace/spring-ai-alibaba/spring-ai-alibaba-examples/playground-flight-booking/target/sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}

@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: prompt-example
+
+  ai:
+    dashscope:
+      api-key:  
+      # workspace-id: ${AI_DASHSCOPE_WORKSPACE_ID}
+server:
+  port: 8082

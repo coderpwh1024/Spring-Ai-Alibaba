@@ -1,0 +1,1 @@
+{"version":3,"file":"FilterModel.d.ts","sourceRoot":"","sources":["../../../../../../src/types/com/vaadin/hilla/crud/filter/FilterModel.ts"],"names":[],"mappings":"AAAA,OAAO,EAA0G,WAAW,IAAI,aAAa,EAAE,MAAM,wBAAwB,CAAC;AAC9K,OAAO,KAAK,QAAQ,MAAM,aAAa,CAAC;AACxC,cAAM,WAAW,CAAC,CAAC,SAAS,QAAQ,GAAG,QAAQ,CAAE,SAAQ,aAAa,CAAC,CAAC,CAAC;IACrE,OAAgB,gBAAgB,iBAA8C;CACjF;AACD,eAAe,WAAW,CAAC"}

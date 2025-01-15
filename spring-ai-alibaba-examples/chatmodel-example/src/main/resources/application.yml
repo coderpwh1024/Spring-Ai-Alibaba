@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: chatmodel-example
+
+  ai:
+    dashscope:
+      api-key: 

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../../src/types/com/vaadin/hilla/crud/filter/PropertyStringFilter/MatcherModel.ts"],
+  "sourcesContent": ["import { _enum as _enum_1, EnumModel as EnumModel_1, makeEnumEmptyValueCreator as makeEnumEmptyValueCreator_1 } from \"@vaadin/hilla-lit-form\";\nimport Matcher_1 from \"./Matcher.js\";\nclass MatcherModel extends EnumModel_1<typeof Matcher_1> {\n    static override createEmptyValue = makeEnumEmptyValueCreator_1(MatcherModel);\n    readonly [_enum_1] = Matcher_1;\n}\nexport default MatcherModel;\n"],
+  "mappings": "AAAA,SAAS,SAAS,SAAS,aAAa,aAAa,6BAA6B,mCAAmC;AACrH,OAAO,eAAe;AACtB,MAAM,qBAAqB,YAA8B;AAAA,EACrD,OAAgB,mBAAmB,4BAA4B,YAAY;AAAA,EAC3E,CAAU,OAAO,IAAI;AACzB;AACA,IAAO,uBAAQ;",
+  "names": []
+}

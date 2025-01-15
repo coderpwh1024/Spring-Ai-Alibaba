@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../src/types/com/vaadin/hilla/mappedtypes/SortModel.ts"],
+  "sourcesContent": ["import { _getPropertyModel as _getPropertyModel_1, ArrayModel as ArrayModel_1, makeObjectEmptyValueCreator as makeObjectEmptyValueCreator_1, ObjectModel as ObjectModel_1 } from \"@vaadin/hilla-lit-form\";\nimport OrderModel_1 from \"./OrderModel.js\";\nimport type Sort_1 from \"./Sort.js\";\nclass SortModel<T extends Sort_1 = Sort_1> extends ObjectModel_1<T> {\n    static override createEmptyValue = makeObjectEmptyValueCreator_1(SortModel);\n    get orders(): ArrayModel_1<OrderModel_1> {\n        return this[_getPropertyModel_1](\"orders\", (parent, key) => new ArrayModel_1(parent, key, false, (parent, key) => new OrderModel_1(parent, key, true), { meta: { javaType: \"java.util.List\" } }));\n    }\n}\nexport default SortModel;\n"],
+  "mappings": "AAAA,SAAS,qBAAqB,qBAAqB,cAAc,cAAc,+BAA+B,+BAA+B,eAAe,qBAAqB;AACjL,OAAO,kBAAkB;AAEzB,MAAM,kBAA6C,cAAiB;AAAA,EAChE,OAAgB,mBAAmB,8BAA8B,SAAS;AAAA,EAC1E,IAAI,SAAqC;AACrC,WAAO,KAAK,mBAAmB,EAAE,UAAU,CAAC,QAAQ,QAAQ,IAAI,aAAa,QAAQ,KAAK,OAAO,CAACA,SAAQC,SAAQ,IAAI,aAAaD,SAAQC,MAAK,IAAI,GAAG,EAAE,MAAM,EAAE,UAAU,iBAAiB,EAAE,CAAC,CAAC;AAAA,EACpM;AACJ;AACA,IAAO,oBAAQ;",
+  "names": ["parent", "key"]
+}

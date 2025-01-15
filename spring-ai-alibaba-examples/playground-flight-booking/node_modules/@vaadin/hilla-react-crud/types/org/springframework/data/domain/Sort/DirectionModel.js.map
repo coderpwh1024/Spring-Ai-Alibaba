@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../src/types/org/springframework/data/domain/Sort/DirectionModel.ts"],
+  "sourcesContent": ["import { _enum as _enum_1, EnumModel as EnumModel_1, makeEnumEmptyValueCreator as makeEnumEmptyValueCreator_1 } from \"@vaadin/hilla-lit-form\";\nimport Direction_1 from \"./Direction.js\";\nclass DirectionModel extends EnumModel_1<typeof Direction_1> {\n    static override createEmptyValue = makeEnumEmptyValueCreator_1(DirectionModel);\n    readonly [_enum_1] = Direction_1;\n}\nexport default DirectionModel;\n"],
+  "mappings": "AAAA,SAAS,SAAS,SAAS,aAAa,aAAa,6BAA6B,mCAAmC;AACrH,OAAO,iBAAiB;AACxB,MAAM,uBAAuB,YAAgC;AAAA,EACzD,OAAgB,mBAAmB,4BAA4B,cAAc;AAAA,EAC7E,CAAU,OAAO,IAAI;AACzB;AACA,IAAO,yBAAQ;",
+  "names": []
+}

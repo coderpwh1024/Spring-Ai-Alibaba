@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: output-parser-example
+
+  ai:
+    dashscope:
+      api-key:  
+
+server:
+  port: 8083

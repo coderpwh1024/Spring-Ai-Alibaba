@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/autocrud-feature.ts"],
+  "sourcesContent": ["/* eslint-disable import/export */\nimport { AutoCrud as _AutoCrud } from './autocrud.js';\nimport { featureRegistration } from './util';\n\nexport * from './autocrud.js';\n\nexport const AutoCrud: typeof _AutoCrud = featureRegistration(_AutoCrud, 'AutoCrud');\n"],
+  "mappings": "AACA,SAAS,YAAY,iBAAiB;AACtC,SAAS,2BAA2B;AAEpC,cAAc;AAEP,MAAM,WAA6B,oBAAoB,WAAW,UAAU;",
+  "names": []
+}

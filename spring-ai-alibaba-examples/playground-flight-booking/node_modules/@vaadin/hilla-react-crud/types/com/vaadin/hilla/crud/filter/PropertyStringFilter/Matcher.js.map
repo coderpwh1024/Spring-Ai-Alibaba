@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../../src/types/com/vaadin/hilla/crud/filter/PropertyStringFilter/Matcher.ts"],
+  "sourcesContent": ["enum Matcher {\n    EQUALS = \"EQUALS\",\n    CONTAINS = \"CONTAINS\",\n    LESS_THAN = \"LESS_THAN\",\n    GREATER_THAN = \"GREATER_THAN\"\n}\nexport default Matcher;\n"],
+  "mappings": "AAAA,IAAK,UAAL,kBAAKA,aAAL;AACI,EAAAA,SAAA,YAAS;AACT,EAAAA,SAAA,cAAW;AACX,EAAAA,SAAA,eAAY;AACZ,EAAAA,SAAA,kBAAe;AAJd,SAAAA;AAAA,GAAA;AAML,IAAO,kBAAQ;",
+  "names": ["Matcher"]
+}

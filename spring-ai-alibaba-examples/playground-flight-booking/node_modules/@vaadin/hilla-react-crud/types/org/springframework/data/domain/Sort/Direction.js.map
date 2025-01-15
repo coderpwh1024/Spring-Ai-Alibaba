@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../src/types/org/springframework/data/domain/Sort/Direction.ts"],
+  "sourcesContent": ["enum Direction {\n    ASC = \"ASC\",\n    DESC = \"DESC\"\n}\nexport default Direction;\n"],
+  "mappings": "AAAA,IAAK,YAAL,kBAAKA,eAAL;AACI,EAAAA,WAAA,SAAM;AACN,EAAAA,WAAA,UAAO;AAFN,SAAAA;AAAA,GAAA;AAIL,IAAO,oBAAQ;",
+  "names": ["Direction"]
+}

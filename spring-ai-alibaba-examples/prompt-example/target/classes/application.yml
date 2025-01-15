@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: prompt-example
+
+  ai:
+    dashscope:
+      api-key: sk-022008276e27468293dba948147c50d0
+server:
+  port: 8081

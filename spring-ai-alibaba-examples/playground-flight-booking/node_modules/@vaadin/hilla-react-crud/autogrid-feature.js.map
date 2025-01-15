@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/autogrid-feature.ts"],
+  "sourcesContent": ["/* eslint-disable import/export */\nimport { AutoGrid as _AutoGrid } from './autogrid.js';\nimport { featureRegistration } from './util';\n\nexport * from './autogrid.js';\n\nexport const AutoGrid: typeof _AutoGrid = featureRegistration(_AutoGrid, 'AutoGrid');\n"],
+  "mappings": "AACA,SAAS,YAAY,iBAAiB;AACtC,SAAS,2BAA2B;AAEpC,cAAc;AAEP,MAAM,WAA6B,oBAAoB,WAAW,UAAU;",
+  "names": []
+}

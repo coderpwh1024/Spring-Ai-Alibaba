@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/autoform-feature.ts"],
+  "sourcesContent": ["/* eslint-disable import/export */\nimport { AutoForm as _AutoForm } from './autoform.js';\nimport { featureRegistration } from './util';\n\nexport * from './autoform.js';\n\nexport const AutoForm: typeof _AutoForm = featureRegistration(_AutoForm, 'AutoForm');\n"],
+  "mappings": "AACA,SAAS,YAAY,iBAAiB;AACtC,SAAS,2BAA2B;AAEpC,cAAc;AAEP,MAAM,WAA6B,oBAAoB,WAAW,UAAU;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../src/types/org/springframework/data/domain/Sort/NullHandlingModel.ts"],
+  "sourcesContent": ["import { _enum as _enum_1, EnumModel as EnumModel_1, makeEnumEmptyValueCreator as makeEnumEmptyValueCreator_1 } from \"@vaadin/hilla-lit-form\";\nimport NullHandling_1 from \"./NullHandling.js\";\nclass NullHandlingModel extends EnumModel_1<typeof NullHandling_1> {\n    static override createEmptyValue = makeEnumEmptyValueCreator_1(NullHandlingModel);\n    readonly [_enum_1] = NullHandling_1;\n}\nexport default NullHandlingModel;\n"],
+  "mappings": "AAAA,SAAS,SAAS,SAAS,aAAa,aAAa,6BAA6B,mCAAmC;AACrH,OAAO,oBAAoB;AAC3B,MAAM,0BAA0B,YAAmC;AAAA,EAC/D,OAAgB,mBAAmB,4BAA4B,iBAAiB;AAAA,EAChF,CAAU,OAAO,IAAI;AACzB;AACA,IAAO,4BAAQ;",
+  "names": []
+}

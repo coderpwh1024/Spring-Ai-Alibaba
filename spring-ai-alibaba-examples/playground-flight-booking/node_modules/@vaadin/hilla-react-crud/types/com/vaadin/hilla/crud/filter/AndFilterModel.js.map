@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../src/types/com/vaadin/hilla/crud/filter/AndFilterModel.ts"],
+  "sourcesContent": ["import { _getPropertyModel as _getPropertyModel_1, ArrayModel as ArrayModel_1, makeObjectEmptyValueCreator as makeObjectEmptyValueCreator_1, StringModel as StringModel_1 } from \"@vaadin/hilla-lit-form\";\nimport type AndFilter_1 from \"./AndFilter.js\";\nimport FilterModel_1 from \"./FilterModel.js\";\nclass AndFilterModel<T extends AndFilter_1 = AndFilter_1> extends FilterModel_1<T> {\n    static override createEmptyValue = makeObjectEmptyValueCreator_1(AndFilterModel);\n    get children(): ArrayModel_1<FilterModel_1> {\n        return this[_getPropertyModel_1](\"children\", (parent, key) => new ArrayModel_1(parent, key, false, (parent, key) => new FilterModel_1(parent, key, false), { meta: { javaType: \"java.util.List\" } }));\n    }\n}\nexport default AndFilterModel;\n"],
+  "mappings": "AAAA,SAAS,qBAAqB,qBAAqB,cAAc,cAAc,+BAA+B,+BAA+B,eAAe,qBAAqB;AAEjL,OAAO,mBAAmB;AAC1B,MAAM,uBAA4D,cAAiB;AAAA,EAC/E,OAAgB,mBAAmB,8BAA8B,cAAc;AAAA,EAC/E,IAAI,WAAwC;AACxC,WAAO,KAAK,mBAAmB,EAAE,YAAY,CAAC,QAAQ,QAAQ,IAAI,aAAa,QAAQ,KAAK,OAAO,CAACA,SAAQC,SAAQ,IAAI,cAAcD,SAAQC,MAAK,KAAK,GAAG,EAAE,MAAM,EAAE,UAAU,iBAAiB,EAAE,CAAC,CAAC;AAAA,EACxM;AACJ;AACA,IAAO,yBAAQ;",
+  "names": ["parent", "key"]
+}

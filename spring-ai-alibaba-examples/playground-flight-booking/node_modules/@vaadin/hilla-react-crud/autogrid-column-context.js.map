@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/autogrid-column-context.tsx"],
+  "sourcesContent": ["import type { GridSorterDirection } from '@vaadin/react-components/GridSorter.js';\nimport { type Dispatch, type SetStateAction, createContext, type ComponentType } from 'react';\nimport type { ColumnOptions } from './autogrid-columns';\nimport type { HeaderFilterRendererProps } from './header-filter';\nimport type { PropertyInfo } from './model-info';\nimport type FilterUnion from './types/com/vaadin/hilla/crud/filter/FilterUnion';\n\nexport interface SorterState {\n  direction: GridSorterDirection;\n}\n\nexport type SortState = Record<string, SorterState | undefined>;\n\nexport type ColumnContext = Readonly<{\n  propertyInfo: PropertyInfo;\n  setColumnFilter(filter: FilterUnion, filterKey: string): void;\n  sortState: SortState;\n  setSortState: Dispatch<SetStateAction<SortState>>;\n  customColumnOptions?: ColumnOptions;\n  headerFilterRenderer: ComponentType<HeaderFilterRendererProps>;\n  filterKey: string;\n}>;\n\nexport const ColumnContext = createContext<ColumnContext | null>(null);\n\nexport type CustomColumnContext = Readonly<{\n  setColumnFilter(filter: FilterUnion, filterKey: string): void;\n  headerFilterRenderer: ComponentType<HeaderFilterRendererProps>;\n  filterKey: string;\n}>;\n\nexport const CustomColumnContext = createContext<CustomColumnContext | null>(null);\n"],
+  "mappings": "AACA,SAA6C,qBAAyC;AAsB/E,MAAM,gBAAgB,cAAoC,IAAI;AAQ9D,MAAM,sBAAsB,cAA0C,IAAI;",
+  "names": []
+}

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/media-query.ts"],
+  "sourcesContent": ["import { useEffect, useState } from 'react';\n\nexport function useMediaQuery(query: string): boolean {\n  const [matches, setMatches] = useState(() => window.matchMedia(query).matches);\n\n  useEffect(() => {\n    const listener = (e: MediaQueryListEvent) => setMatches(e.matches);\n    const mediaQuery = window.matchMedia(query);\n    setMatches(mediaQuery.matches);\n    mediaQuery.addEventListener('change', listener);\n    return () => mediaQuery.removeEventListener('change', listener);\n  }, [query]);\n\n  return matches;\n}\n"],
+  "mappings": "AAAA,SAAS,WAAW,gBAAgB;AAE7B,SAAS,cAAc,OAAwB;AACpD,QAAM,CAAC,SAAS,UAAU,IAAI,SAAS,MAAM,OAAO,WAAW,KAAK,EAAE,OAAO;AAE7E,YAAU,MAAM;AACd,UAAM,WAAW,CAAC,MAA2B,WAAW,EAAE,OAAO;AACjE,UAAM,aAAa,OAAO,WAAW,KAAK;AAC1C,eAAW,WAAW,OAAO;AAC7B,eAAW,iBAAiB,UAAU,QAAQ;AAC9C,WAAO,MAAM,WAAW,oBAAoB,UAAU,QAAQ;AAAA,EAChE,GAAG,CAAC,KAAK,CAAC;AAEV,SAAO;AACT;",
+  "names": []
+}

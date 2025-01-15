@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: helloworld-example
+
+  ai:
+    dashscope:
+      api-key: sk-022008276e27468293dba948147c50d0

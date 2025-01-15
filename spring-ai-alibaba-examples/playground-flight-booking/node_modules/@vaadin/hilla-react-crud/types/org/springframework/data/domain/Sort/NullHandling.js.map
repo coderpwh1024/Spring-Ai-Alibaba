@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../src/types/org/springframework/data/domain/Sort/NullHandling.ts"],
+  "sourcesContent": ["enum NullHandling {\n    NATIVE = \"NATIVE\",\n    NULLS_FIRST = \"NULLS_FIRST\",\n    NULLS_LAST = \"NULLS_LAST\"\n}\nexport default NullHandling;\n"],
+  "mappings": "AAAA,IAAK,eAAL,kBAAKA,kBAAL;AACI,EAAAA,cAAA,YAAS;AACT,EAAAA,cAAA,iBAAc;AACd,EAAAA,cAAA,gBAAa;AAHZ,SAAAA;AAAA,GAAA;AAKL,IAAO,uBAAQ;",
+  "names": ["NullHandling"]
+}
