@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>spring-ai-alibaba-example-nacos</artifactId>
+    <groupId>com.alibaba.cloud.ai</groupId>
+    <artifactId>spring-ai-alibaba-examples</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
@@ -28,6 +28,7 @@
 
         <!-- Spring AI Alibaba -->
         <spring-ai-alibaba.version>1.0.0-M3.3</spring-ai-alibaba.version>
+<!--        <spring-ai-alibaba.version>1.0.0-M3.3</spring-ai-alibaba.version>-->
 
         <!-- Spring Boot -->
         <spring-boot.version>3.4.0</spring-boot.version>
@@ -37,6 +38,11 @@
         <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
+
+    <modules>
+        <module>spring-ai-alibaba-prompt-example</module>
+    </modules>
+
 
     <dependencyManagement>
         <dependencies>
