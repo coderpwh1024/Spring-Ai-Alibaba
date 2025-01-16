@@ -12,11 +12,14 @@ spring:
         namespace: ${nacos.config-namespace}
       config:
         enabled: true
-        server-addr: ${nacos.server-addr}
+#        server-addr: ${nacos.server-addr}
+        server-addr: ${nacos.server-ip}
         namespace: ${nacos.config-namespace}
         file-extension: yml
         group: DEFAULT_GROUP
         # 常规配置文件
         # 优先级大于 shared-configs，在 shared-configs 之后加载
         extension-configs:
-        data-id: ${spring.application.name}.yaml
+           - data-id: ${spring.application.name}.yaml
+        username: 'nacos'
+        password: 'nacos'
