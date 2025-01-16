@@ -1,0 +1,10 @@
+server:
+  port: 10007
+
+spring:
+  application:
+    name: spring-ai-alibaba-prompt-example
+
+  ai:
+    dashscope:
+      api-key: sk-xxxxxx
