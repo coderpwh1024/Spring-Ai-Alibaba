@@ -1,6 +1,6 @@
 package com.coderpwh.controller;
 
-import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.UserMessage;
@@ -27,12 +27,11 @@ public class RoleController {
     @Value("classpath:/prompts/system-message.st")
     private Resource systemResource;
 
-    private final ChatClient chatClient;
 
-    @Autowired
-    public RoleController(ChatClient.Builder builder) {
-        this.chatClient = builder.build();
-    }
+    @jakarta.annotation.Resource
+    private ChatClient chatClient;
+
+
 
 
     @GetMapping("/roles")
@@ -48,11 +47,18 @@ public class RoleController {
         SystemPromptTemplate systemPromptTemplate = new SystemPromptTemplate(systemResource);
         Message systemMessage = systemPromptTemplate.createMessage(Map.of("name", name, "voice", voice));
 
-        return chatClient.prompt(new Prompt(List.of(userMessage, systemMessage)))
+   /*     return chatClient.prompt(new Prompt(List.of(userMessage, systemMessage)))
                 .call()
                 .chatResponse()
                 .getResult()
                 .getOutput();
+        */
+
+
+        return chatClient.call(new Prompt(List.of(userMessage, systemMessage)))
+                .getResult()
+                .getOutput();
+
     }
 
 

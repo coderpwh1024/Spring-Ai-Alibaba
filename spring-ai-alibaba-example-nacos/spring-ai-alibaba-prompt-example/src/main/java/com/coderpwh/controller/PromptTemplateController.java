@@ -3,7 +3,7 @@ package com.coderpwh.controller;
 import com.alibaba.cloud.ai.prompt.ConfigurablePromptTemplate;
 import com.alibaba.cloud.ai.prompt.ConfigurablePromptTemplateFactory;
 import opennlp.tools.util.StringUtil;
-import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -28,16 +28,15 @@ public class PromptTemplateController {
     @Value("classpath:/prompts/joke-prompt.st")
     private Resource jokeResource;
 
-    private final ChatClient chatClient;
+
+    @jakarta.annotation.Resource
+    private  ChatClient chatClient;
 
 
-    private final ConfigurablePromptTemplateFactory configurablePromptTemplateFactory;
+    @jakarta.annotation.Resource
+    private  ConfigurablePromptTemplateFactory configurablePromptTemplateFactory;
 
-    public PromptTemplateController(ChatClient.Builder builder, ConfigurablePromptTemplateFactory configurablePromptTemplateFactory) {
 
-        this.chatClient = builder.build();
-        this.configurablePromptTemplateFactory = configurablePromptTemplateFactory;
-    }
 
 
     /***
@@ -52,7 +51,10 @@ public class PromptTemplateController {
         PromptTemplate promptTemplate = new PromptTemplate(jokeResource);
         Prompt prompt = promptTemplate.create(Map.of("adjective", adjective, "topic", topic));
 
-        return chatClient.prompt(prompt).call().chatResponse().getResult().getOutput();
+
+       return chatClient.call(prompt).getResult().getOutput();
+
+//        return chatClient.prompt(prompt).call().chatResponse().getResult().getOutput();
     }
 
 
@@ -77,7 +79,8 @@ public class PromptTemplateController {
             prompt = template.create();
         }
 
-        return chatClient.prompt(prompt).call().chatResponse().getResult().getOutput();
+        return chatClient.call(prompt).getResult().getOutput();
+//        return chatClient.prompt(prompt).call().chatResponse().getResult().getOutput();
     }
 
 

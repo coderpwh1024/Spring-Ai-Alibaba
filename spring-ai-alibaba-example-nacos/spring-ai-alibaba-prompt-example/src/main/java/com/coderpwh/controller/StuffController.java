@@ -2,7 +2,9 @@ package com.coderpwh.controller;
 
 
 import com.coderpwh.entity.Completion;
-import org.springframework.ai.chat.client.ChatClient;
+import org.checkerframework.checker.units.qual.C;
+import org.springframework.ai.chat.ChatClient;
+import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,12 +31,10 @@ public class StuffController {
     @Value("classpath:/prompts/qa-prompt.st")
     private Resource qaPromptResource;
 
-    private final ChatClient chatClient;
 
-    @Autowired
-    public StuffController(ChatClient.Builder builder) {
-        this.chatClient = builder.build();
-    }
+    @jakarta.annotation.Resource
+    private ChatClient chatClient;
+
 
     @GetMapping(value = "/stuff")
     public Completion completion(
@@ -52,12 +52,18 @@ public class StuffController {
         } else {
             map.put("context", "");
         }
+        Prompt prompt = promptTemplate.create(map);
+       String result =    chatClient.call(prompt.getContents());
 
-        return new Completion(
+       return  new Completion(result);
+
+    /*    return new Completion(
                 chatClient.prompt(promptTemplate.create(map))
-                        .call()
+                        .call(promptTemplate.create(map))
                         .content()
-        );
+
+
+        );*/
     }
 
 
