@@ -19,7 +19,6 @@
         <dependency>
             <groupId>com.alibaba.cloud.ai</groupId>
             <artifactId>spring-ai-alibaba-starter</artifactId>
-<!--            <version>1.0.0-M3.3</version>-->
             <version>${spring-ai-alibaba.version}</version>
         </dependency>
 
@@ -40,7 +39,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
-            <version>3.1.7</version>
+            <version>4.0.2</version>
         </dependency>
     </dependencies>
 
