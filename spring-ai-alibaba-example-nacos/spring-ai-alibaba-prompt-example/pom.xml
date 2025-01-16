@@ -21,19 +21,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
         <spring-cloud-alibaba.version>2023.0.0.0-RC1</spring-cloud-alibaba.version>
-        <spring-cloud.version>2023.0.0</spring-cloud.version>
+<!--        <spring-cloud.version>2023.0.0</spring-cloud.version>-->
         <spring-ai-alibaba.version>1.0.0-M3.3</spring-ai-alibaba.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
+         <!--   <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -72,13 +72,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
-            <version>4.1.0</version>
+            <version>4.0.1</version>
         </dependency>
         <!--需要引入该jar才能使bootstrap配置文件生效-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>
-            <version>4.1.0</version>
+            <version>4.0.1</version>
         </dependency>
 
     </dependencies>
