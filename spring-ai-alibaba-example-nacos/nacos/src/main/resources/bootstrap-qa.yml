@@ -1,0 +1,4 @@
+nacos:
+  server-addr: http://xxxxxxxx:8848
+  config-namespace: xxxx-xxx-4785-9d61-xxxx
+  server-ip: xxxxx:8848

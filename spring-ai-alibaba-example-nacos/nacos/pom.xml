@@ -19,22 +19,11 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
-
-        <!-- Spring AI -->
-<!--        <spring-ai-alibaba.version>1.0.0-M3.3</spring-ai-alibaba.version>-->
-<!--        <spring-ai.version>1.0.0-M3</spring-ai.version>-->
-
         <!-- utils -->
         <commons-lang3.version>3.14.0</commons-lang3.version>
     </properties>
 
     <dependencies>
-      <!--  <dependency>
-            <groupId>com.alibaba.cloud.ai</groupId>
-            <artifactId>spring-ai-alibaba-starter</artifactId>
-            <version>${spring-ai-alibaba.version}</version>
-        </dependency>-->
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -44,19 +33,52 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-
-<!--        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-pdf-document-reader</artifactId>
-            <version>${spring-ai.version}</version>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>2023.0.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <version>2023.0.1.0</version>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-elasticsearch-store-spring-boot-starter</artifactId>
-            <version>${spring-ai.version}</version>
-        </dependency>-->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
     </dependencies>
+
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
+            <!--   <activation>
+                   <activeByDefault>true</activeByDefault>
+               </activation>-->
+        </profile>
+        <profile>
+            <id>qa</id>
+            <properties>
+                <spring.profiles.active>qa</spring.profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
