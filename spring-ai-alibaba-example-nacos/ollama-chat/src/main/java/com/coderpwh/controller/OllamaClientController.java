@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/ollama/chat-client")
 public class OllamaClientController {
 
-    private static final String DEFAULT_PROMPT = "你好，介绍下你自己！请用中文回答。";
+    private static final String DEFAULT_PROMPT = "你好，慧慧与依依应该如何学习西门庆,请用中文";
 
     private final ChatClient ollamaiChatClient;
 
