@@ -1,0 +1,4 @@
+nacos:
+  server-addr: http://127.0.0.1:8848
+  config-namespace: bb145e3b-59df-4fa8-9d4e-5eb3e13ad459
+  server-ip: 127.0.0.1:8848
