@@ -7,6 +7,7 @@ import co.elastic.clients.elasticsearch.indices.IndexSettings;
 import com.alibaba.cloud.ai.advisor.RetrievalRerankAdvisor;
 import com.alibaba.cloud.ai.model.RerankModel;
 import com.coderpwh.service.RagService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,7 @@ import java.util.Map;
 /**
  * @author coderpwh
  */
+@Slf4j
 @Service
 public class LocalRagService implements RagService {
 
@@ -95,6 +97,8 @@ public class LocalRagService implements RagService {
         SearchRequest searchRequest = SearchRequest.defaults()
                 .withFilterExpression(new FilterExpressionBuilder().eq(textField, message).build());
 
+        logger.info("es search request: {}", searchRequest);
+
         // Step3 - Retrieve and llm generate
         String promptTemplate = getPromptTemplate(systemResource);
         ChatClient chatClient = ChatClient.builder(chatModel)
@@ -145,8 +149,7 @@ public class LocalRagService implements RagService {
             }
 
             logger.info("create elasticsearch index {} successfully", indexName);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             logger.error("failed to create index", e);
             throw new RuntimeException(e);
         }
@@ -155,13 +158,10 @@ public class LocalRagService implements RagService {
     private String getPromptTemplate(Resource systemResource) {
         try {
             return systemResource.getContentAsString(StandardCharsets.UTF_8);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 
 
 }
