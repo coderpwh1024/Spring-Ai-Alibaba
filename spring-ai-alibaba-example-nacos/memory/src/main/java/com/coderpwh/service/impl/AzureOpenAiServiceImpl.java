@@ -14,6 +14,10 @@ import com.coderpwh.common.config.AzureConfig;
 import com.coderpwh.service.AzureOpenAiService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.azure.openai.AzureOpenAiChatModel;
+import org.springframework.ai.azure.openai.AzureOpenAiChatOptions;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,18 +35,45 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
     private AzureConfig azureConfig;
 
 
-    @Override
+
+/*
+     @Override
     public String chat(String message) {
 //        log.info("azureConfig:{}",JSON.toJSONString(azureConfig));
 
-        OpenAIClient client = new OpenAIClientBuilder().endpoint(azureConfig.getEndpoint()).credential(new AzureKeyCredential(azureConfig.getApiKey())).buildClient();
+        OpenAIClient client = new OpenAIClientBuilder()
+                .endpoint(azureConfig.getEndpoint())
+                .credential(new AzureKeyCredential(azureConfig.getApiKey()))
+                .buildClient();
+
         List<ChatRequestMessage> chatMessages = new ArrayList<>();
         chatMessages.add(new ChatRequestSystemMessage("你是一个智能小助手"));
         chatMessages.add(new ChatRequestUserMessage(message));
-
         ChatCompletions chatCompletionsAnswer = client.getChatCompletions(azureConfig.getModelName(), new ChatCompletionsOptions(chatMessages));
         log.info("请求结果为:{}", JSON.toJSONString(chatCompletionsAnswer));
         String result = chatCompletionsAnswer.getChoices().get(0).getMessage().getContent();
         return result;
     }
+*/
+
+
+    @Override
+    public String chat(String message){
+
+        var  openAIClientBuilder = new OpenAIClientBuilder()
+                .credential(new AzureKeyCredential(azureConfig.getApiKey()))
+                .endpoint(azureConfig.getEndpoint());
+
+
+        var chatModel = AzureOpenAiChatModel.builder()
+                .openAIClientBuilder(openAIClientBuilder)
+                .build();
+
+
+        ChatResponse chatResponse = chatModel.call(new Prompt(message));
+        log.info("chatResponse:{}",chatResponse);
+        return "";
+    }
+
+
 }
