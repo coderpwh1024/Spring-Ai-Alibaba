@@ -108,7 +108,7 @@ public class LocalRagService implements RagService {
         logger.info("es search request: {}", searchRequest);
 
         // Step3 - Retrieve and llm generate
-      /*  String promptTemplate = getPromptTemplate(systemResource);
+  /*      String promptTemplate = getPromptTemplate(systemResource);
        ChatClient chatClient = ChatClient.builder(chatModel)
                 .defaultAdvisors(new RetrievalRerankAdvisor(vectorStore, rerankModel, searchRequest, promptTemplate, 0.1))
                 .build();*/
