@@ -13,6 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.autoconfigure.vectorstore.elasticsearch.ElasticsearchVectorStoreProperties;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.client.advisor.api.Advisor;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.document.Document;
@@ -29,6 +36,7 @@ import reactor.core.publisher.Flux;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,10 +108,17 @@ public class LocalRagService implements RagService {
         logger.info("es search request: {}", searchRequest);
 
         // Step3 - Retrieve and llm generate
-        String promptTemplate = getPromptTemplate(systemResource);
-        ChatClient chatClient = ChatClient.builder(chatModel)
+      /*  String promptTemplate = getPromptTemplate(systemResource);
+       ChatClient chatClient = ChatClient.builder(chatModel)
                 .defaultAdvisors(new RetrievalRerankAdvisor(vectorStore, rerankModel, searchRequest, promptTemplate, 0.1))
-                .build();
+                .build();*/
+
+        List<Advisor> advisorsList = new ArrayList<>();
+        PromptChatMemoryAdvisor promptChatMemoryAdvisor = new PromptChatMemoryAdvisor(new InMemoryChatMemory(), "你是一个活泼可爱的智能小助手");
+
+        advisorsList.add(new QuestionAnswerAdvisor(vectorStore));
+        advisorsList.add(promptChatMemoryAdvisor);
+        ChatClient chatClient = ChatClient.builder(chatModel).defaultAdvisors(advisorsList).defaultUser(message).build();
 
         return chatClient.prompt().user(message).stream().chatResponse();
     }
