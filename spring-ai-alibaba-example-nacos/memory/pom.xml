@@ -63,23 +63,33 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
-        <dependency>
+   <!--     <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-pdf-document-reader</artifactId>
             <version>${spring-ai.version}</version>
-        </dependency>
+        </dependency>-->
 
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-elasticsearch-store-spring-boot-starter</artifactId>
             <version>${spring-ai.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!--微软openAi -->
-        <dependency>
+       <!-- <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-ai-openai</artifactId>
             <version>1.0.0-beta.13</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-azure-openai</artifactId>
+            <version>${spring-ai.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.70</version>
         </dependency>
 
     </dependencies>
