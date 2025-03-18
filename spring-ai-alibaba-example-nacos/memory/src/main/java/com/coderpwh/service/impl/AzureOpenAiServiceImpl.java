@@ -16,9 +16,15 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.azure.openai.AzureOpenAiChatModel;
 import org.springframework.ai.azure.openai.AzureOpenAiChatOptions;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.api.Advisor;
+import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,21 +64,30 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
 
 
     @Override
-    public String chat(String message){
-
-        var  openAIClientBuilder = new OpenAIClientBuilder()
+    public String chat(String message) {
+        var openAIClientBuilder = new OpenAIClientBuilder()
                 .credential(new AzureKeyCredential(azureConfig.getApiKey()))
                 .endpoint(azureConfig.getEndpoint());
-
+        var openAIChatOptions = AzureOpenAiChatOptions.builder()
+                .deploymentName(azureConfig.getModelName())
+                .build();
 
         var chatModel = AzureOpenAiChatModel.builder()
                 .openAIClientBuilder(openAIClientBuilder)
+                .defaultOptions(openAIChatOptions)
                 .build();
 
 
-        ChatResponse chatResponse = chatModel.call(new Prompt(message));
-        log.info("chatResponse:{}",chatResponse);
-        return "";
+        List<Advisor> advisorsList = new ArrayList<>();
+        advisorsList.add(new PromptChatMemoryAdvisor(new InMemoryChatMemory(), "你是一个智能小助手,回答用户所有的提问，要求风格幽默有趣"));
+
+        ChatClient chatClient = ChatClient.builder(chatModel).defaultAdvisors(advisorsList).build();
+
+        ChatResponse chatResponse = chatClient.prompt().user(message).call().chatResponse();
+        log.info("callResponseSpec:{}", JSON.toJSONString(chatResponse));
+        String text = chatResponse.getResult().getOutput().getText();
+
+        return text;
     }
 
 
