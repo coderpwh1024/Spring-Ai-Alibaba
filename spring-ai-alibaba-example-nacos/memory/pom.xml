@@ -74,6 +74,14 @@
             <artifactId>spring-ai-elasticsearch-store-spring-boot-starter</artifactId>
             <version>${spring-ai.version}</version>
         </dependency>
+
+        <!--微软openAi -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-ai-openai</artifactId>
+            <version>1.0.0-beta.13</version>
+        </dependency>
+
     </dependencies>
 
 
