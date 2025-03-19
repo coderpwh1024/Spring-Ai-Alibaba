@@ -8,7 +8,8 @@ spring:
     name: memory
   elasticsearch:
     uris: http://127.0.0.1:9200
-
+    username:
+    password:
   ai:
     azure:
       openai:
@@ -21,9 +22,8 @@ spring:
           enabled: true
           metadata-mode: embed
           options:
-            model: text-embedding-ada-002
-
-
+            model: "text-embedding-ada-002"
+            deployment-name: "Server"
     vectorstore:
       elasticsearch:
         initialize-schema: true

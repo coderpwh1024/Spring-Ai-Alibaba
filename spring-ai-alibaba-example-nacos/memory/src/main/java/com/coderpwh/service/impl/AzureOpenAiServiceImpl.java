@@ -9,22 +9,33 @@ import co.elastic.clients.elasticsearch._types.mapping.TypeMapping;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import com.alibaba.fastjson.JSON;
 import com.coderpwh.service.AzureOpenAiService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.client.RestClient;
 import org.springframework.ai.autoconfigure.vectorstore.elasticsearch.ElasticsearchVectorStoreProperties;
 import org.springframework.ai.azure.openai.AzureOpenAiChatModel;
 import org.springframework.ai.azure.openai.AzureOpenAiEmbeddingModel;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.client.advisor.api.Advisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.embedding.TokenCountBatchingStrategy;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStoreOptions;
 import org.springframework.stereotype.Service;
-
+import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.ai.vectorstore.elasticsearch.SimilarityFunction;
+import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStore;
+import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStoreOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,33 +50,28 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AzureOpenAiServiceImpl implements AzureOpenAiService {
 
 
-    private VectorStore vectorStore;
+    @Resource
+    private   AzureOpenAiChatModel chatModel;
 
 
-    private final AzureOpenAiChatModel chatModel;
-
-    private final ElasticsearchClient elasticsearchClient;
-
-    private final ElasticsearchVectorStoreProperties options;
-
-    private final AzureOpenAiEmbeddingModel embeddingModel;
+/*    @Resource
+    private  VectorStore vectorStore;*/
 
 
-    public AzureOpenAiServiceImpl(VectorStore vectorStore, AzureOpenAiChatModel chatModel, ElasticsearchClient elasticsearchClient, ElasticsearchVectorStoreProperties options,AzureOpenAiEmbeddingModel embeddingModel) {
-        this.vectorStore = vectorStore;
-        this.chatModel = chatModel;
-        this.elasticsearchClient = elasticsearchClient;
-        this.options = options;
-        this.embeddingModel = embeddingModel;
-    }
+    @Resource
+    private  MessageChatMemoryServiceImpl messageChatMemoryService;
 
 
     @Override
     public String chat(String message) {
+
         List<Advisor> advisorsList = new ArrayList<>();
         advisorsList.add(new PromptChatMemoryAdvisor(new InMemoryChatMemory(), "你是一个智能小助手,回答用户所有的提问，要求风格幽默有趣"));
 //        advisorsList.add(new QuestionAnswerAdvisor(vectorStore));
-        log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
+//        log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
+
+        advisorsList.add(new MessageChatMemoryAdvisor(messageChatMemoryService));
+
 
         ChatClient chatClient = ChatClient.builder(chatModel).defaultAdvisors(advisorsList).defaultUser(message).build();
 
@@ -99,15 +105,15 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
         log.info("{} documents split", splitDocuments.size());
 
         log.info("create embedding and save to vector store");
-        createIndex();
-        log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
-        vectorStore.add(splitDocuments);
+//        createIndex();
+//        log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
+//        vectorStore.add(splitDocuments);
 
         return "success";
     }
 
 
-    public void createIndex() {
+/*    public void createIndex() {
         try {
             String indexName = options.getIndexName();
             Integer dimsLength = options.getDimensions();
@@ -143,7 +149,7 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
             log.error("创建索引异常");
         }
 
-    }
+    }*/
 
 
 }

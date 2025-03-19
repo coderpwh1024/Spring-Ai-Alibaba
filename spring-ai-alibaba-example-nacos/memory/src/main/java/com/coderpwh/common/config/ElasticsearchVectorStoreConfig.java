@@ -5,6 +5,8 @@ import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import co.elastic.clients.transport.ElasticsearchTransport;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import com.azure.ai.openai.OpenAIClient;
+import com.azure.ai.openai.OpenAIClientBuilder;
+import com.azure.core.credential.AzureKeyCredential;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -24,23 +26,22 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author coderpwh
  */
-/*@Configuration
+@Configuration
 public class ElasticsearchVectorStoreConfig {
 
     @Bean
-    public ElasticsearchClient elasticsearchClient() {
+    public RestClient restClient() {
         BasicCredentialsProvider credsProv = new BasicCredentialsProvider();
 
         RestClient restClient = RestClient
-                .builder(HttpHost.create(host + ":9200"))
+                .builder(HttpHost.create("http://127.0.0.1" + ":9200"))
                 .setHttpClientConfigCallback(hc -> hc.setDefaultCredentialsProvider(credsProv))
                 .build();
 
-        ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
-        return new ElasticsearchClient(transport);
+        return  restClient;
     }
 
-    @Bean
+  /*  @Bean
     public VectorStore vectorStore(RestClient restClient, EmbeddingModel embeddingModel) {
         ElasticsearchVectorStoreOptions options = new ElasticsearchVectorStoreOptions();
         options.setIndexName("chat_memory_index");
@@ -52,7 +53,18 @@ public class ElasticsearchVectorStoreConfig {
                 .initializeSchema(true)
                 .batchingStrategy(new TokenCountBatchingStrategy())
                 .build();
+    }*/
+
+    @Bean
+    public EmbeddingModel embeddingModel() {
+        OpenAIClient client = new OpenAIClientBuilder()
+                .endpoint("")
+                .credential(new AzureKeyCredential(""))
+                .buildClient();
+
+        return new AzureOpenAiEmbeddingModel(client);
+
     }
 
 
-}*/
+}
