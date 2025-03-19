@@ -30,4 +30,10 @@ public class MemoryController {
         return azureOpenAiService.chat(message);
     }
 
+
+    @PostMapping("/index")
+    public String getIndex() {
+        return azureOpenAiService.importData();
+    }
+
 }

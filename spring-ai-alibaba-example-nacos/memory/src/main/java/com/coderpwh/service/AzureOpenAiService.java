@@ -15,4 +15,11 @@ public interface AzureOpenAiService {
      * @return
      */
     public String chat(String message);
+
+
+
+    public String importData();
+
+
+
 }
