@@ -24,16 +24,16 @@
         <!-- utils -->
         <commons-lang3.version>3.14.0</commons-lang3.version>
         <!-- Spring AI -->
-        <spring-ai-alibaba.version>1.0.0-M6.1</spring-ai-alibaba.version>
+<!--        <spring-ai-alibaba.version>1.0.0-M6.1</spring-ai-alibaba.version>-->
         <spring-ai.version>1.0.0-M6</spring-ai.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.alibaba.cloud.ai</groupId>
-            <artifactId>spring-ai-alibaba-starter</artifactId>
-            <version>${spring-ai-alibaba.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud.ai</groupId>-->
+<!--            <artifactId>spring-ai-alibaba-starter</artifactId>-->
+<!--            <version>${spring-ai-alibaba.version}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,17 +44,16 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
-   <!--     <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-pdf-document-reader</artifactId>
-            <version>${spring-ai.version}</version>
-        </dependency>-->
-
-       <!-- <dependency>
+        <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-elasticsearch-store-spring-boot-starter</artifactId>
             <version>${spring-ai.version}</version>
-        </dependency>-->
+        </dependency>
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <version>8.13.3</version>
+        </dependency>
 
 
         <dependency>

@@ -1,23 +1,26 @@
 server:
   port: 9006
 
-azure:
-  endpoint: ""
-  apiKey: ""
-  modelName: ""
+
 
 spring:
   application:
     name: memory
+  elasticsearch:
+    uris: http://127.0.0.1:9200
 
   ai:
-    dashscope:
-      api-key: sk-022008276e27468293dba948147c50d0
-
+    vectorstore:
+      elasticsearch:
+        index-name: chat_memory_index
+        similarity: cosine
+        dimensions: 1536
+        batching-strategy: TOKEN_COUNT
     azure:
       openai:
         api-key: ""
         endpoint: ""
         chat:
           options:
-            deployment-name: ""
+            deployment-name: "Server"
+

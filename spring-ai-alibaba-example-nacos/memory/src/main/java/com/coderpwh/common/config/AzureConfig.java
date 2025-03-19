@@ -7,15 +7,15 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author coderpwh
  */
-@Data
-@Configuration
-@ConfigurationProperties(prefix = "azure")
-public class AzureConfig {
-
-    private String endpoint;
-
-    private String apiKey;
-
-    private String modelName;
-
-}
+//@Data
+//@Configuration
+//@ConfigurationProperties(prefix = "azure")
+//public class AzureConfig {
+//
+//    private String endpoint;
+//
+//    private String apiKey;
+//
+//    private String modelName;
+//
+//}
