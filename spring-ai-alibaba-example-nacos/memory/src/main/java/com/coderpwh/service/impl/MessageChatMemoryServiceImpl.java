@@ -20,6 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class MessageChatMemoryServiceImpl implements ChatMemory {
 
+    Map<String, List<Message>> conversationHistory = new ConcurrentHashMap<>();
 
     /***
      * 添加消息
@@ -29,6 +30,7 @@ public class MessageChatMemoryServiceImpl implements ChatMemory {
     @Override
     public void add(String conversationId, List<Message> messages) {
         log.info("添加消息,conversationId:{},messages:{}", conversationId, JSON.toJSONString(messages));
+
     }
 
 
@@ -40,7 +42,7 @@ public class MessageChatMemoryServiceImpl implements ChatMemory {
      */
     @Override
     public List<Message> get(String conversationId, int lastN) {
-        log.info("查询消息,conversationId:{},lastN:{}", conversationId,lastN);
+        log.info("查询消息,conversationId:{},lastN:{}", conversationId, lastN);
 
         List<Message> list = new ArrayList<>();
         list.add(new Message() {
@@ -51,14 +53,14 @@ public class MessageChatMemoryServiceImpl implements ChatMemory {
 
             @Override
             public String getText() {
-                return "喜欢听周杰伦的歌曲";
+                return "喜欢听周杰伦《七里香》《青花瓷》等歌曲";
             }
 
             @Override
             public Map<String, Object> getMetadata() {
-                Map<String,Object> map = new ConcurrentHashMap<>();
-                map.put("用户问:","喜欢听周杰伦的歌曲");
-                map.put("助手回答:","喜欢听周杰伦《七里香》《青花瓷》等歌曲");
+                Map<String, Object> map = new ConcurrentHashMap<>();
+                map.put("用户问:", "喜欢听周杰伦的歌曲");
+                map.put("助手回答:", "喜欢听周杰伦《七里香》《青花瓷》等歌曲");
                 return map;
             }
         });
@@ -71,6 +73,6 @@ public class MessageChatMemoryServiceImpl implements ChatMemory {
      */
     @Override
     public void clear(String conversationId) {
-       log.info("清除消息,conversationId:{}", conversationId);
+        log.info("清除消息,conversationId:{}", conversationId);
     }
 }

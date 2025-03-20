@@ -22,6 +22,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.client.advisor.VectorStoreChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -38,11 +39,6 @@ import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStore
 import org.springframework.ai.vectorstore.filter.Filter;
 import org.springframework.ai.vectorstore.filter.FilterExpressionBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.ai.vectorstore.elasticsearch.SimilarityFunction;
-import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStore;
-import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStoreOptions;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,8 +75,11 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
     @Override
     public String chat(String message) {
 
+        String userId = "coderpwh";
+
+
         FilterExpressionBuilder b = new FilterExpressionBuilder();
-        Filter.Expression expression = b.eq("user_id", "abc").build();
+        Filter.Expression expression = b.eq("user_id", userId).build();
 
         SearchRequest searchRequest = SearchRequest.builder()
                 .query(message)
@@ -94,11 +93,12 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
 
 
         List<Advisor> advisorsList = new ArrayList<>();
-        advisorsList.add(new QuestionAnswerAdvisor(vectorStore, searchRequest));
-        advisorsList.add(new PromptChatMemoryAdvisor(new InMemoryChatMemory(), "你是一个智能小助手,回答用户所有的提问，要求风格幽默有趣"));
+        advisorsList.add(new PromptChatMemoryAdvisor(new InMemoryChatMemory(), userId, 10, "你是一个智能小助手,回答用户所有的提问，要求风格幽默有趣", 13));
+        advisorsList.add(new MessageChatMemoryAdvisor(messageChatMemoryService, userId, 10, 10));
+        advisorsList.add(new QuestionAnswerAdvisor(vectorStore, searchRequest, "根据上下文内容进行回答", true, 12));
+        advisorsList.add(new SimpleLoggerAdvisor());
         log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
 
-        advisorsList.add(new MessageChatMemoryAdvisor(messageChatMemoryService));
 
         ChatResponse chatResponse = this.chatClient.prompt().advisors(advisorsList).user(message).call().chatResponse();
 
