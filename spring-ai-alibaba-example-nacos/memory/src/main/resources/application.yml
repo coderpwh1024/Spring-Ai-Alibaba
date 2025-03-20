@@ -14,9 +14,9 @@ spring:
         enabled: true
     vectorstore:
       elasticsearch:
-        initialize-schema: true
+#        initialize-schema: true
         index-name: chat_memory_index
-        dimensions: 1536
+#        dimensions: 4096
         similarity: cosine
         batching-strategy: TOKEN_COUNT
 
@@ -26,12 +26,12 @@ spring:
         endpoint: ""
         chat:
           options:
-            deployment-name: ""
+            deployment-name: "Server"
         embedding:
           enabled: true
           metadata-mode: embed
           options:
-            model: "text-embedding-3-larg"
-            deployment-name: "text-embedding-3-larg"
+            model: "text-embedding-3-large"
+            deployment-name: "text-embedding-3-large"
 
 

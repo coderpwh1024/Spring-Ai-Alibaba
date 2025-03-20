@@ -3,10 +3,12 @@ package com.coderpwh.service.impl;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.mapping.DenseVectorProperty;
 import co.elastic.clients.elasticsearch._types.mapping.KeywordProperty;
+import co.elastic.clients.elasticsearch._types.mapping.ObjectProperty;
 import co.elastic.clients.elasticsearch._types.mapping.Property;
 import co.elastic.clients.elasticsearch._types.mapping.TextProperty;
 import co.elastic.clients.elasticsearch._types.mapping.TypeMapping;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
+import co.elastic.clients.elasticsearch.indices.IndexSettings;
 import com.alibaba.fastjson.JSON;
 import com.coderpwh.service.AzureOpenAiService;
 import jakarta.annotation.Resource;
@@ -20,6 +22,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.client.advisor.VectorStoreChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.InMemoryChatMemory;
@@ -32,15 +35,19 @@ import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStoreOptions;
+import org.springframework.ai.vectorstore.filter.Filter;
+import org.springframework.ai.vectorstore.filter.FilterExpressionBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.elasticsearch.SimilarityFunction;
 import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStore;
 import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStoreOptions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -50,57 +57,50 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class AzureOpenAiServiceImpl implements AzureOpenAiService {
 
-
-/*
-    @Resource
-    private   AzureOpenAiChatModel chatModel;
-
-
-   @Resource
-    private  ElasticsearchVectorStore vectorStore;
-*/
-
-    private ElasticsearchVectorStore vectorStore;
+    private VectorStore vectorStore;
     private ChatClient chatClient;
 
-    public AzureOpenAiServiceImpl(ElasticsearchVectorStore vectorStore, ChatClient.Builder clientBuilder) {
+    private final ElasticsearchClient elasticsearchClient;
+
+    private final ElasticsearchVectorStoreProperties options;
+
+    public AzureOpenAiServiceImpl(ElasticsearchClient elasticsearchClient, ElasticsearchVectorStoreProperties options, VectorStore vectorStore, ChatClient.Builder clientBuilder) {
+        this.elasticsearchClient = elasticsearchClient;
+        this.options = options;
         this.vectorStore = vectorStore;
         this.chatClient = clientBuilder.build();
     }
 
 
     @Resource
-    private  MessageChatMemoryServiceImpl messageChatMemoryService;
+    private MessageChatMemoryServiceImpl messageChatMemoryService;
 
 
     @Override
     public String chat(String message) {
 
+        FilterExpressionBuilder b = new FilterExpressionBuilder();
+        Filter.Expression expression = b.eq("user_id", "abc").build();
 
-        try {
-            List<Document> vectorStoreResult =
-                    vectorStore.doSimilaritySearch(SearchRequest.builder().query("歌曲").topK(5)
-                            .similarityThreshold(0.6).build());
-            log.info("vectorStoreResult:{}", JSON.toJSONString(vectorStoreResult));
-        }catch (Exception e){
-            log.error("异常信息为:{}",e.getMessage());
-            return "failed";
-        }
+        SearchRequest searchRequest = SearchRequest.builder()
+                .query(message)
+//                .topK(6)
+//                .similarityThreshold(0.8d)
+                .filterExpression(expression)
+                .build();
+
+        List<Document> list = vectorStore.similaritySearch(searchRequest);
+        log.info("list:{}", JSON.toJSONString(list));
 
 
         List<Advisor> advisorsList = new ArrayList<>();
+        advisorsList.add(new QuestionAnswerAdvisor(vectorStore, searchRequest));
         advisorsList.add(new PromptChatMemoryAdvisor(new InMemoryChatMemory(), "你是一个智能小助手,回答用户所有的提问，要求风格幽默有趣"));
-        advisorsList.add(new QuestionAnswerAdvisor(vectorStore));
         log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
 
-//        advisorsList.add(new MessageChatMemoryAdvisor(messageChatMemoryService));
+        advisorsList.add(new MessageChatMemoryAdvisor(messageChatMemoryService));
 
-
-       /* ChatClient chatClient = ChatClient.builder(chatModel).defaultAdvisors(advisorsList).defaultUser(message).build();
-        ChatResponse chatResponse = chatClient.prompt().user(message).call().chatResponse();*/
-
-
-        ChatResponse chatResponse= this.chatClient.prompt().advisors(advisorsList).user(message).call().chatResponse();
+        ChatResponse chatResponse = this.chatClient.prompt().advisors(advisorsList).user(message).call().chatResponse();
 
         log.info("callResponseSpec:{}", JSON.toJSONString(chatResponse));
         String text = chatResponse.getResult().getOutput().getText();
@@ -116,28 +116,31 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
     @Override
     public String importData() {
 
+        String content = "我非常喜欢看书";
+
         Map<String, Object> map = new ConcurrentHashMap<>();
-        map.put("id", 10001);
-        map.put("user_id", "coderpwh");
-        map.put("user_content", "我喜欢喝可乐");
-        map.put("prompt_content", "可乐可以让你非常快乐");
-        map.put("create_time", "2025-01-01 00:00:00");
+        map.put("id", 10003);
+        map.put("user_id", "abc");
+        map.put("user_content", content);
+        map.put("prompt_content", "书是人类进步的阶梯");
+        map.put("create_time", "2025-03-20 16:20:00");
 
         List<Document> documents = new ArrayList<>();
-        documents.add(new Document("我喜欢喝可乐", map));
+        documents.add(new Document(content, map));
+
         List<Document> splitDocuments = new TokenTextSplitter().apply(documents);
         log.info("{} documents split", splitDocuments.size());
 
         log.info("create embedding and save to vector store");
 //        createIndex();
-//        log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
-//        vectorStore.add(splitDocuments);
+        log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
+        vectorStore.add(splitDocuments);
 
         return "success";
     }
 
 
-/*    public void createIndex() {
+    public void createIndex() {
         try {
             String indexName = options.getIndexName();
             Integer dimsLength = options.getDimensions();
@@ -153,17 +156,29 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
             }
 
             String similarityAlgo = options.getSimilarity().name();
+
+            IndexSettings indexSettings = IndexSettings
+                    .of(settings -> settings.numberOfShards(String.valueOf(1)).numberOfReplicas(String.valueOf(1)));
+
+
             Map<String, Property> properties = new HashMap<>();
             properties.put("embedding", Property.of(property -> property.denseVector(
-                    DenseVectorProperty.of(dense -> dense.index(true).dims(dimsLength).similarity(similarityAlgo)))));
-            properties.put("id", Property.of(property -> property.keyword(KeywordProperty.of(k -> k))));
-            properties.put("user_id", Property.of(property -> property.keyword(KeywordProperty.of(k -> k))));
-            properties.put("user_content", Property.of(property -> property.text(TextProperty.of(t -> t))));
-            properties.put("prompt_content", Property.of(property -> property.text(TextProperty.of(t -> t))));
-            properties.put("create_time", Property.of(property -> property.text(TextProperty.of(d -> d))));
+                    DenseVectorProperty.of(dense -> dense.index(true).similarity(similarityAlgo)))));
+            properties.put("content", Property.of(property -> property.text(TextProperty.of(t -> t))));
+
+            Map<String, Property> metadata = new HashMap<>();
+            metadata.put("id", Property.of(property -> property.keyword(KeywordProperty.of(k -> k))));
+            metadata.put("user_id", Property.of(property -> property.keyword(KeywordProperty.of(k -> k))));
+            metadata.put("user_content", Property.of(property -> property.text(TextProperty.of(t -> t))));
+            metadata.put("prompt_content", Property.of(property -> property.text(TextProperty.of(t -> t))));
+            metadata.put("create_time", Property.of(property -> property.text(TextProperty.of(d -> d))));
+
+            properties.put("metadata",
+                    Property.of(property -> property.object(ObjectProperty.of(op -> op.properties(metadata)))));
 
             CreateIndexResponse indexResponse = elasticsearchClient.indices()
                     .create(createIndexBuilder -> createIndexBuilder.index(indexName)
+                            .settings(indexSettings)
                             .mappings(TypeMapping.of(mappings -> mappings.properties(properties))));
             if (!indexResponse.acknowledged()) {
                 log.error("创建索引失败");
@@ -173,7 +188,7 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
             log.error("创建索引异常");
         }
 
-    }*/
+    }
 
 
 }

@@ -58,7 +58,7 @@ public class MessageChatMemoryServiceImpl implements ChatMemory {
             public Map<String, Object> getMetadata() {
                 Map<String,Object> map = new ConcurrentHashMap<>();
                 map.put("用户问:","喜欢听周杰伦的歌曲");
-                map.put("助手回答:","喜欢听周杰伦《七里香》《青花瓷等歌曲》");
+                map.put("助手回答:","喜欢听周杰伦《七里香》《青花瓷》等歌曲");
                 return map;
             }
         });
