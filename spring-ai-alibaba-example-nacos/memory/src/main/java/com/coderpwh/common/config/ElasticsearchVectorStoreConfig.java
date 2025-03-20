@@ -26,6 +26,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author coderpwh
  */
+/*
 @Configuration
 public class ElasticsearchVectorStoreConfig {
 
@@ -41,7 +42,7 @@ public class ElasticsearchVectorStoreConfig {
         return  restClient;
     }
 
-  /*  @Bean
+   @Bean
     public VectorStore vectorStore(RestClient restClient, EmbeddingModel embeddingModel) {
         ElasticsearchVectorStoreOptions options = new ElasticsearchVectorStoreOptions();
         options.setIndexName("chat_memory_index");
@@ -53,7 +54,7 @@ public class ElasticsearchVectorStoreConfig {
                 .initializeSchema(true)
                 .batchingStrategy(new TokenCountBatchingStrategy())
                 .build();
-    }*/
+    }
 
     @Bean
     public EmbeddingModel embeddingModel() {
@@ -68,3 +69,4 @@ public class ElasticsearchVectorStoreConfig {
 
 
 }
+*/

@@ -29,6 +29,7 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.embedding.TokenCountBatchingStrategy;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStoreOptions;
 import org.springframework.stereotype.Service;
@@ -50,12 +51,22 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AzureOpenAiServiceImpl implements AzureOpenAiService {
 
 
+/*
     @Resource
     private   AzureOpenAiChatModel chatModel;
 
 
-/*    @Resource
-    private  VectorStore vectorStore;*/
+   @Resource
+    private  ElasticsearchVectorStore vectorStore;
+*/
+
+    private ElasticsearchVectorStore vectorStore;
+    private ChatClient chatClient;
+
+    public AzureOpenAiServiceImpl(ElasticsearchVectorStore vectorStore, ChatClient.Builder clientBuilder) {
+        this.vectorStore = vectorStore;
+        this.chatClient = clientBuilder.build();
+    }
 
 
     @Resource
@@ -65,18 +76,31 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
     @Override
     public String chat(String message) {
 
+
+        try {
+            List<Document> vectorStoreResult =
+                    vectorStore.doSimilaritySearch(SearchRequest.builder().query("歌曲").topK(5)
+                            .similarityThreshold(0.6).build());
+            log.info("vectorStoreResult:{}", JSON.toJSONString(vectorStoreResult));
+        }catch (Exception e){
+            log.error("异常信息为:{}",e.getMessage());
+            return "failed";
+        }
+
+
         List<Advisor> advisorsList = new ArrayList<>();
         advisorsList.add(new PromptChatMemoryAdvisor(new InMemoryChatMemory(), "你是一个智能小助手,回答用户所有的提问，要求风格幽默有趣"));
-//        advisorsList.add(new QuestionAnswerAdvisor(vectorStore));
-//        log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
+        advisorsList.add(new QuestionAnswerAdvisor(vectorStore));
+        log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
 
-        advisorsList.add(new MessageChatMemoryAdvisor(messageChatMemoryService));
-
-
-        ChatClient chatClient = ChatClient.builder(chatModel).defaultAdvisors(advisorsList).defaultUser(message).build();
+//        advisorsList.add(new MessageChatMemoryAdvisor(messageChatMemoryService));
 
 
-        ChatResponse chatResponse = chatClient.prompt().user(message).call().chatResponse();
+       /* ChatClient chatClient = ChatClient.builder(chatModel).defaultAdvisors(advisorsList).defaultUser(message).build();
+        ChatResponse chatResponse = chatClient.prompt().user(message).call().chatResponse();*/
+
+
+        ChatResponse chatResponse= this.chatClient.prompt().advisors(advisorsList).user(message).call().chatResponse();
 
         log.info("callResponseSpec:{}", JSON.toJSONString(chatResponse));
         String text = chatResponse.getResult().getOutput().getText();
