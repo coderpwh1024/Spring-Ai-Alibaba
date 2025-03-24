@@ -26,47 +26,25 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author coderpwh
  */
-/*
+
 @Configuration
 public class ElasticsearchVectorStoreConfig {
 
     @Bean
-    public RestClient restClient() {
+    public ElasticsearchClient elasticsearchClient() {
         BasicCredentialsProvider credsProv = new BasicCredentialsProvider();
+      /*  credsProv.setCredentials(
+                AuthScope.ANY, new UsernamePasswordCredentials("", "")
+        );*/
 
         RestClient restClient = RestClient
-                .builder(HttpHost.create("http://127.0.0.1" + ":9200"))
+                .builder(HttpHost.create("http://127.0.0.1:9200"))
                 .setHttpClientConfigCallback(hc -> hc.setDefaultCredentialsProvider(credsProv))
                 .build();
 
-        return  restClient;
+        ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
+        return new ElasticsearchClient(transport);
     }
-
-   @Bean
-    public VectorStore vectorStore(RestClient restClient, EmbeddingModel embeddingModel) {
-        ElasticsearchVectorStoreOptions options = new ElasticsearchVectorStoreOptions();
-        options.setIndexName("chat_memory_index");
-        options.setSimilarity(SimilarityFunction.cosine);
-        options.setDimensions(1536);
-
-        return ElasticsearchVectorStore.builder(restClient, embeddingModel)
-                .options(options)
-                .initializeSchema(true)
-                .batchingStrategy(new TokenCountBatchingStrategy())
-                .build();
-    }
-
-    @Bean
-    public EmbeddingModel embeddingModel() {
-        OpenAIClient client = new OpenAIClientBuilder()
-                .endpoint("")
-                .credential(new AzureKeyCredential(""))
-                .buildClient();
-
-        return new AzureOpenAiEmbeddingModel(client);
-
-    }
-
 
 }
-*/
+

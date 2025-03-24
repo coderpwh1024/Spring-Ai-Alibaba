@@ -1,6 +1,7 @@
 package com.coderpwh.controller;
 
 import com.coderpwh.entity.request.VectorStoreRequestDTO;
+import com.coderpwh.service.AzureElasticSearchService;
 import com.coderpwh.service.AzureOpenAiService;
 import jakarta.annotation.Resource;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -26,6 +27,10 @@ public class MemoryController {
     @Resource
     private AzureOpenAiService azureOpenAiService;
 
+
+    @Resource
+    private AzureElasticSearchService azureElasticSearchService;
+
     @PostMapping("/message")
     public String getMemory(@RequestBody HashMap<String, String> map) {
         String message = map.get("message");
@@ -42,6 +47,13 @@ public class MemoryController {
     @PostMapping("/vector")
     public String importVectorData(@RequestBody List<VectorStoreRequestDTO> list) {
         return azureOpenAiService.importVectorData(list);
+    }
+
+
+    @PostMapping("/es")
+    public String importVectorData(@RequestBody  HashMap<String, String> map) {
+        String message = map.get("message");
+        return azureElasticSearchService.chat(message);
     }
 
 
