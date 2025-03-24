@@ -10,6 +10,7 @@ import co.elastic.clients.elasticsearch._types.mapping.TypeMapping;
 import co.elastic.clients.elasticsearch.indices.CreateIndexResponse;
 import co.elastic.clients.elasticsearch.indices.IndexSettings;
 import com.alibaba.fastjson.JSON;
+import com.coderpwh.entity.request.VectorStoreRequestDTO;
 import com.coderpwh.service.AzureOpenAiService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.PromptChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.client.advisor.RetrievalAugmentationAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.client.advisor.VectorStoreChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.api.Advisor;
@@ -32,6 +34,7 @@ import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.embedding.TokenCountBatchingStrategy;
+import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -39,11 +42,12 @@ import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStore
 import org.springframework.ai.vectorstore.filter.Filter;
 import org.springframework.ai.vectorstore.filter.FilterExpressionBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -74,17 +78,15 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
 
     @Override
     public String chat(String message) {
-
         String userId = "coderpwh";
-
 
         FilterExpressionBuilder b = new FilterExpressionBuilder();
         Filter.Expression expression = b.eq("user_id", userId).build();
 
         SearchRequest searchRequest = SearchRequest.builder()
                 .query(message)
-//                .topK(6)
-//                .similarityThreshold(0.8d)
+                .topK(10)
+                .similarityThreshold(0.1d)
                 .filterExpression(expression)
                 .build();
 
@@ -92,11 +94,25 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
         log.info("list:{}", JSON.toJSONString(list));
 
 
+        String systemPrompt = """
+                你是一个智能助手，幽默有趣回答用户的问题
+                """;
+        if (!CollectionUtils.isEmpty(list)) {
+            StringBuffer buffer = new StringBuffer();
+            for (Document document : list) {
+                buffer.append(document.getText());
+            }
+            systemPrompt += buffer.toString();
+        }
+        String vectorPrompt = """
+                你是一个智能小助手,对用户的提问内容进行相关搜索,依据搜索结果进行总结归纳提取后回答
+                """;
+
+
         List<Advisor> advisorsList = new ArrayList<>();
-        advisorsList.add(new PromptChatMemoryAdvisor(new InMemoryChatMemory(), userId, 10, "你是一个智能小助手,回答用户所有的提问，要求风格幽默有趣", 13));
+        advisorsList.add(new PromptChatMemoryAdvisor(new InMemoryChatMemory(), userId, 10, systemPrompt, 15));
         advisorsList.add(new MessageChatMemoryAdvisor(messageChatMemoryService, userId, 10, 10));
-        advisorsList.add(new QuestionAnswerAdvisor(vectorStore, searchRequest, "根据上下文内容进行回答", true, 12));
-        advisorsList.add(new SimpleLoggerAdvisor());
+        advisorsList.add(new QuestionAnswerAdvisor(vectorStore, searchRequest, vectorPrompt, false, 12));
         log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
 
 
@@ -116,14 +132,14 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
     @Override
     public String importData() {
 
-        String content = "我非常喜欢看书";
+        String content = "我喜欢小米汽车SU7 MAX";
 
         Map<String, Object> map = new ConcurrentHashMap<>();
         map.put("id", 10003);
-        map.put("user_id", "abc");
+        map.put("user_id", "coderpwh");
         map.put("user_content", content);
-        map.put("prompt_content", "书是人类进步的阶梯");
-        map.put("create_time", "2025-03-20 16:20:00");
+        map.put("prompt_content", "小米汽车非常帅气");
+        map.put("create_time", "2025-03-21 12:20:00");
 
         List<Document> documents = new ArrayList<>();
         documents.add(new Document(content, map));
@@ -132,7 +148,7 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
         log.info("{} documents split", splitDocuments.size());
 
         log.info("create embedding and save to vector store");
-//        createIndex();
+        createIndex();
         log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
         vectorStore.add(splitDocuments);
 
@@ -171,7 +187,7 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
             metadata.put("user_id", Property.of(property -> property.keyword(KeywordProperty.of(k -> k))));
             metadata.put("user_content", Property.of(property -> property.text(TextProperty.of(t -> t))));
             metadata.put("prompt_content", Property.of(property -> property.text(TextProperty.of(t -> t))));
-            metadata.put("create_time", Property.of(property -> property.text(TextProperty.of(d -> d))));
+            metadata.put("create_time", Property.of(property -> property.keyword(KeywordProperty.of(d -> d))));
 
             properties.put("metadata",
                     Property.of(property -> property.object(ObjectProperty.of(op -> op.properties(metadata)))));
@@ -187,7 +203,29 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
         } catch (Exception e) {
             log.error("创建索引异常");
         }
+    }
 
+
+    @Override
+    public String importVectorData(List<VectorStoreRequestDTO> list) {
+        log.info("开始导入数据,list:{}", JSON.toJSONString(list));
+
+        if (!CollectionUtils.isEmpty(list)) {
+            for (VectorStoreRequestDTO request : list) {
+                List<Document> documents = new ArrayList<>();
+                documents.add(new Document(request.getId(), request.getContent(), request.getMap()));
+                List<Document> splitDocuments = new TokenTextSplitter().apply(documents);
+                log.info("vectorStore:{}", JSON.toJSONString(splitDocuments));
+
+                log.info("{} documents split", splitDocuments.size());
+                log.info("create embedding and save to vector store");
+                log.info("vectorStore:{}", JSON.toJSONString(vectorStore));
+                vectorStore.add(splitDocuments);
+            }
+        } else {
+            log.error("集合为空");
+        }
+        return "success";
     }
 
 

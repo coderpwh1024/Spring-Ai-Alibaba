@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class MessageChatMemoryServiceImpl implements ChatMemory {
 
-    Map<String, List<Message>> conversationHistory = new ConcurrentHashMap<>();
+
 
     /***
      * 添加消息
@@ -53,17 +53,58 @@ public class MessageChatMemoryServiceImpl implements ChatMemory {
 
             @Override
             public String getText() {
-                return "喜欢听周杰伦《七里香》《青花瓷》等歌曲";
+                return "我昨天上午丢了100块钱";
             }
 
             @Override
             public Map<String, Object> getMetadata() {
                 Map<String, Object> map = new ConcurrentHashMap<>();
-                map.put("用户问:", "喜欢听周杰伦的歌曲");
-                map.put("助手回答:", "喜欢听周杰伦《七里香》《青花瓷》等歌曲");
+                map.put("用户问:", "我昨天上午丢了100块钱");
+                map.put("助手回答:", "丢了100元一定非常伤心吧！");
                 return map;
             }
         });
+
+        list.add(new Message() {
+            @Override
+            public MessageType getMessageType() {
+                return MessageType.USER;
+            }
+
+            @Override
+            public String getText() {
+                return "我昨天下午丢了200块钱";
+            }
+
+            @Override
+            public Map<String, Object> getMetadata() {
+                Map<String, Object> map = new ConcurrentHashMap<>();
+                map.put("用户问:", "我昨天下午丢了200块钱");
+                map.put("助手回答:", "丢了200元一定非常伤心吧！！");
+                return map;
+            }
+        });
+
+        list.add(new Message() {
+            @Override
+            public MessageType getMessageType() {
+                return MessageType.USER;
+            }
+
+            @Override
+            public String getText() {
+                return "我昨天晚上丢了500块钱";
+            }
+
+            @Override
+            public Map<String, Object> getMetadata() {
+                Map<String, Object> map = new ConcurrentHashMap<>();
+                map.put("用户问:", "我昨天晚上丢了500块钱");
+                map.put("助手回答:", "丢了500元一定非常伤心吧！！");
+                return map;
+            }
+        });
+
         return list;
     }
 

@@ -1,5 +1,6 @@
 package com.coderpwh.controller;
 
+import com.coderpwh.entity.request.VectorStoreRequestDTO;
 import com.coderpwh.service.AzureOpenAiService;
 import jakarta.annotation.Resource;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,5 +37,12 @@ public class MemoryController {
     public String getIndex() {
         return azureOpenAiService.importData();
     }
+
+
+    @PostMapping("/vector")
+    public String importVectorData(@RequestBody List<VectorStoreRequestDTO> list) {
+        return azureOpenAiService.importVectorData(list);
+    }
+
 
 }
