@@ -1,6 +1,8 @@
 package com.coderpwh.tool;
 
 import com.coderpwh.tool.support.ToolExecuteResult;
+import com.coderpwh.tool.support.serpapi.SerpApiProperties;
+import com.coderpwh.tool.support.serpapi.SerpApiService;
 import org.slf4j.Logger;
 import org.springframework.ai.chat.model.ToolContext;
 
