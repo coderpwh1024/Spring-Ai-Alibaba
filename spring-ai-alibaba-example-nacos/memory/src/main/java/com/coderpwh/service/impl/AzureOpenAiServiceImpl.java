@@ -85,7 +85,7 @@ public class AzureOpenAiServiceImpl implements AzureOpenAiService {
 
         SearchRequest searchRequest = SearchRequest.builder()
                 .query(message)
-                .topK(10)
+                .topK(3)
                 .similarityThreshold(0.1d)
                 .filterExpression(expression)
                 .build();
