@@ -19,6 +19,7 @@
     <modules>
         <module>start</module>
         <module>start/server/starter-webflux-server</module>
+        <module>start/server/starter-stock-server</module>
     </modules>
 
     <properties>
