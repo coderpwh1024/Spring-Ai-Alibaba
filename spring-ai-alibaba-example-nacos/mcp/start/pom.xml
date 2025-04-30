@@ -14,6 +14,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>server/starter-stdio-server</module>
+        <module>client/mcp-webflux-client</module>
     </modules>
 
     <properties>
