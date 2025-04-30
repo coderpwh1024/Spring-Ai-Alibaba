@@ -11,6 +11,10 @@
 
     <groupId>com.coderpwh</groupId>
     <artifactId>start</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>server/starter-stdio-server</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
