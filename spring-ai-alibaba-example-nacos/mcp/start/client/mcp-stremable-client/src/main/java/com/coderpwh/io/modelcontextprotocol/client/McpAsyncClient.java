@@ -45,8 +45,7 @@ public class McpAsyncClient {
     private static final Logger logger = LoggerFactory.getLogger(McpAsyncClient.class);
 
 
-    private static TypeReference<Void> VOID_TYPE_REFERENCE = new TypeReference<>() {
-    };
+    private static TypeReference<Void> VOID_TYPE_REFERENCE = new TypeReference<>() {};
 
     protected final Sinks.One<McpSchema.InitializeResult> initializedSink = Sinks.one();
 
