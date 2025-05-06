@@ -7,7 +7,7 @@
         "-Dspring.main.web-application-type=none",
         "-Dlogging.pattern.console=",
         "-jar",
-        "D:\\open_sources\\spring-ai-alibaba-examples\\spring-ai-alibaba-mcp-example\\starter-example\\server\\starter-stdio-server\\target\\mcp-stdio-server-exmaple-0.0.1-SNAPSHOT.jar"            ],
+        "/Users/coderpwh/workSpace/Spring-Ai-Alibaba/spring-ai-alibaba-example-nacos/mcp/start/server/starter-stdio-server/target/starter-stdio-server-1.0-SNAPSHOT.jar"            ],
       "env": {}
     }
   }
