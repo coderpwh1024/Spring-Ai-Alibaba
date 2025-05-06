@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/start/client/mcp-stremable-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/start/client/mcp-webflux-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/start/client/starter-default-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/start/server/starter-stdio-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/start/server/starter-stock-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/start/server/starter-webflux-server/src/main/java" charset="UTF-8" />

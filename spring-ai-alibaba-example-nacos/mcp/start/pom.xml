@@ -16,6 +16,7 @@
         <module>server/starter-stdio-server</module>
         <module>client/mcp-webflux-client</module>
         <module>client/mcp-stremable-client</module>
+        <module>client/starter-default-client</module>
     </modules>
 
     <properties>
