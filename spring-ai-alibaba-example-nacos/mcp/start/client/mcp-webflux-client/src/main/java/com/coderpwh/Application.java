@@ -1,3 +1,5 @@
+package com.coderpwh;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.ai.chat.client.ChatClient;
@@ -9,7 +11,9 @@ import org.springframework.context.annotation.Bean;
 /**
  * @author coderpwh
  */
-@SpringBootApplication(exclude = {org.springframework.ai.autoconfigure.mcp.client.SseHttpClientTransportAutoConfiguration.class})
+@SpringBootApplication(exclude = {
+        org.springframework.ai.autoconfigure.mcp.client.SseHttpClientTransportAutoConfiguration.class
+})
 public class Application {
 
 
