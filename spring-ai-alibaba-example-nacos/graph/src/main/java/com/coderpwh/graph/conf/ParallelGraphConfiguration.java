@@ -1,5 +1,7 @@
 package com.coderpwh.graph.conf;
 
+import com.alibaba.cloud.ai.graph.GraphRepresentation;
+import com.alibaba.cloud.ai.graph.GraphStateException;
 import com.alibaba.cloud.ai.graph.OverAllState;
 import com.alibaba.cloud.ai.graph.StateGraph;
 import com.alibaba.cloud.ai.graph.action.NodeAction;
@@ -11,8 +13,6 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.w3c.dom.Node;
-
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +28,7 @@ public class ParallelGraphConfiguration {
 
 
     @Bean
-    public StateGraph parallelGraph(ChatModel chatModel) {
+    public StateGraph parallelGraph(ChatModel chatModel) throws GraphStateException {
 
         ChatClient client = ChatClient.builder(chatModel).defaultAdvisors(new SimpleLoggerAdvisor()).build();
 
@@ -42,8 +42,27 @@ public class ParallelGraphConfiguration {
             return s;
         };
 
-        StateGraph graph = new StateGraph("ParallelDemo", factory);
-//                .addNode("start", node_async(new InputNode()));
+        StateGraph graph = new StateGraph("ParallelDemo", factory)
+                .addNode("start", node_async(new InputNode()))
+                .addNode("sentiment", node_async(new SentimentAnalysisNode(client, "inputText")))
+                .addNode("keyword", node_async(new KeywordExtractionNode(client, "inputText")))
+                .addNode("merge", node_async(new MergeResultsNode()))
+
+                .addEdge(START, "sentiment")
+                .addEdge(START, "keyword")
+                .addEdge("sentiment","merge")
+                .addEdge("keyword","merge")
+
+                .addEdge("merge",END);
+
+        GraphRepresentation representation = graph.getGraph(GraphRepresentation.Type.PLANTUML,
+                "parallel demo flow");
+
+        System.out.println("\n=== Parallel Demo UML Flow ===");
+        System.out.println(representation.content());
+        System.out.println("==================================\n");
+
+        return graph;
     }
 
 
