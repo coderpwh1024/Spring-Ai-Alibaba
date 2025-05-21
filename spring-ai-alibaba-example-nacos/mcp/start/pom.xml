@@ -17,6 +17,7 @@
         <module>client/mcp-webflux-client</module>
         <module>client/mcp-stremable-client</module>
         <module>client/starter-default-client</module>
+        <module>client/mcp-client</module>
     </modules>
 
     <properties>
