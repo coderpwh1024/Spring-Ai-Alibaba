@@ -1,3 +1,14 @@
 spring:
   application:
     name: mcp
+  servlet:
+     port: 8089
+  ai:
+    openai:
+      base-url: https://idealab.alibaba-inc.com
+      api-key:
+      chat:
+        completions-path: api/openai/v1/chat/completions
+        options:
+          model: gpt-4o-0513-global
+          temperature: 0.1
