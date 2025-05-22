@@ -11,17 +11,14 @@ import org.springframework.context.annotation.Bean;
 /**
  * @author coderpwh
  */
-@SpringBootApplication(exclude = {
-        org.springframework.ai.autoconfigure.mcp.client.SseHttpClientTransportAutoConfiguration.class
-})
+@SpringBootApplication
 public class Application {
 
+    private String userInput = "北京的天气如何？";
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-
-    private String userInput = "北京的天气如何？";
 
 
     @Bean

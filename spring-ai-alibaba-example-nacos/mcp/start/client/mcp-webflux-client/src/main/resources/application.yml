@@ -13,7 +13,7 @@ spring:
     web-application-type: none
   ai:
     dashscope:
-      api-key: 
+      api-key:
     mcp:
       client:
         sse:
