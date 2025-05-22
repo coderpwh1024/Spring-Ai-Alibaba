@@ -25,7 +25,7 @@ public class ChatClientConfig {
     public CommandLineRunner predefinedQuestions(ConfigurableApplicationContext context) {
 
         return args -> {
-            var chatClient = ChatClient.builder(chatModel).defaultTools(toolCallbackProvider).build();
+            var chatClient = ChatClient.builder(chatModel).build();
             String userInput = "帮我将这个网页内容进行抓取 https://www.shuaijiao.cn/news/view/68320.html";
             System.out.println("\n>>> QUESTION: " + userInput);
             System.out.println("\n>>> ASSISTANT: " + chatClient.prompt().user(userInput).call().content());
