@@ -17,7 +17,7 @@ public class Application {
 
 //    private String userInput = "武汉的天气如何？";
 
-    private  String  userInput="生成一张小狗的照片";
+    private  String  userInput="生成一张小狗的照片，顺便查询一下今日北京的天气";
 
 
     @Bean
@@ -25,7 +25,7 @@ public class Application {
 
         return args -> {
 
-            var chatClient = chatClientBuilder.defaultTools(tools).build();
+            var chatClient = chatClientBuilder.defaultTools(tools.getToolCallbacks()).build();
 
             System.out.println("问题:" + userInput);
             System.out.println("助理回答:"+ chatClient.prompt(userInput).call().content());
