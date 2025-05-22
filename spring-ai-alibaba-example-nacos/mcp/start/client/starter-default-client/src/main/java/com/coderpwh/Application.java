@@ -15,7 +15,10 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    private String userInput = "武汉的天气如何？";
+//    private String userInput = "武汉的天气如何？";
+
+    private  String  userInput="生成一张小狗的照片";
+
 
     @Bean
     public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools, ConfigurableApplicationContext context) {

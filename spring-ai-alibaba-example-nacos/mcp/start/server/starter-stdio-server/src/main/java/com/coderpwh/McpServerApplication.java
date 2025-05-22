@@ -1,5 +1,6 @@
 package com.coderpwh;
 
+import com.coderpwh.service.DogService;
 import com.coderpwh.service.OpenMeteoService;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
@@ -20,8 +21,8 @@ public class McpServerApplication {
 
 
     @Bean
-    public ToolCallbackProvider weatherTools(OpenMeteoService openMeteoService) {
-        return MethodToolCallbackProvider.builder().toolObjects(openMeteoService).build();
+    public ToolCallbackProvider weatherTools(OpenMeteoService openMeteoService, DogService dogService) {
+        return MethodToolCallbackProvider.builder().toolObjects(openMeteoService).toolObjects(dogService).build();
     }
 
 
