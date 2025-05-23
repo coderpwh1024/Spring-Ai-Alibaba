@@ -1,5 +1,6 @@
 package com.coderpwh;
 
+import com.coderpwh.service.OpenMeteoService;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.boot.SpringApplication;
