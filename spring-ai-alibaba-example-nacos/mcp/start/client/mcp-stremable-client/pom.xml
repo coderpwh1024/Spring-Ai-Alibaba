@@ -16,8 +16,6 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-ai-alibaba.version>1.0.0-M6.1</spring-ai-alibaba.version>
-        <spring-ai.version>1.0.0-M6</spring-ai.version>
     </properties>
 
 
@@ -25,34 +23,25 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-client-webflux</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-autoconfigure-mcp-client</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-mcp</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>com.alibaba.cloud.ai</groupId>
-            <artifactId>spring-ai-alibaba-starter</artifactId>
-            <version>${spring-ai-alibaba.version}</version>
+            <artifactId>spring-ai-alibaba-starter-dashscope</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.38</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
     <build>
