@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: mcp
-  servlet:
-     port: 8089
-  ai:
-   dashscope:
-     api-key:
