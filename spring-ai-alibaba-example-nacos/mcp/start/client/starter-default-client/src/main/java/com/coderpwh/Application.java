@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+
 @SpringBootApplication
 public class Application {
 
@@ -15,24 +16,28 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    private String userInput = "武汉的天气如何？";
+    private String userInput = "北京的天气如何？";
+
 
 //    private  String  userInput="生成一张小狗的照片，顺便查询一下今日北京的天气";
 
 
+
     @Bean
-    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools, ConfigurableApplicationContext context) {
+    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, ToolCallbackProvider tools,
+                                                 ConfigurableApplicationContext context) {
 
         return args -> {
 
-            var chatClient = chatClientBuilder.defaultTools(tools.getToolCallbacks()).build();
+            var chatClient = chatClientBuilder
+                    .defaultToolCallbacks(tools)
+                    .build();
 
-            System.out.println("问题:" + userInput);
-            System.out.println("助理回答:"+ chatClient.prompt(userInput).call().content());
+            System.out.println("\n>>> QUESTION: " + userInput);
+            System.out.println("\n>>> ASSISTANT: " + chatClient.prompt(userInput).call().content());
 
             context.close();
         };
-
     }
 
 

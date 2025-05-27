@@ -10,16 +10,6 @@
         "/Users/coderpwh/workSpace/Spring-Ai-Alibaba/spring-ai-alibaba-example-nacos/mcp/start/server/starter-stdio-server/target/starter-stdio-server-1.0-SNAPSHOT.jar"
       ],
       "env": {}
-    },
-    "dog": {
-      "command": "java",
-      "args": [
-        "-Dspring.ai.mcp.server.stdio=true",
-        "-Dspring.main.web-application-type=none",
-        "-Dlogging.pattern.console=",
-        "-jar",
-        "/Users/coderpwh/workSpace/Spring-Ai-Alibaba/spring-ai-alibaba-example-nacos/mcp/start/server/dog-stdio-server/target/dog-stdio-server-1.0-SNAPSHOT.jar"
-      ]
     }
   }
 }
