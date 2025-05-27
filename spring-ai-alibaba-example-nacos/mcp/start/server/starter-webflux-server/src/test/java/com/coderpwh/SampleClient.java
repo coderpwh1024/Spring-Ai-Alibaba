@@ -3,14 +3,13 @@ package com.coderpwh;
 import java.util.Map;
 
 import io.modelcontextprotocol.client.McpClient;
-import io.modelcontextprotocol.spec.ClientMcpTransport;
 import io.modelcontextprotocol.spec.McpSchema.CallToolRequest;
 import io.modelcontextprotocol.spec.McpSchema.CallToolResult;
 import io.modelcontextprotocol.spec.McpSchema.ListToolsResult;
 
 public class SampleClient {
 
-    private final ClientMcpTransport clientMcpTransport;
+ /*   private final ClientMcpTransport clientMcpTransport;
 
     public SampleClient(ClientMcpTransport clientMcpTransport) {
         this.clientMcpTransport = clientMcpTransport;
@@ -39,11 +38,7 @@ public class SampleClient {
 
         client.closeGracefully();
 
-
-
-
-
     }
-
+*/
 
 }

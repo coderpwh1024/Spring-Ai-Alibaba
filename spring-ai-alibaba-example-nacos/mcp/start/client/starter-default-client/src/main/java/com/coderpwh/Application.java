@@ -15,9 +15,9 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-//    private String userInput = "武汉的天气如何？";
+    private String userInput = "武汉的天气如何？";
 
-    private  String  userInput="生成一张小狗的照片，顺便查询一下今日北京的天气";
+//    private  String  userInput="生成一张小狗的照片，顺便查询一下今日北京的天气";
 
 
     @Bean

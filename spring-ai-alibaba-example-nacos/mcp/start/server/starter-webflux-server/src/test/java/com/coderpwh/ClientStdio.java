@@ -9,7 +9,7 @@ import java.io.File;
 public class ClientStdio {
 
     public static void main(String[] args) {
-
+/*
         System.out.println(new File(".").getAbsolutePath());
 
         var stdioParams = ServerParameters.builder("java")
@@ -22,7 +22,7 @@ public class ClientStdio {
 
         var transport = new StdioClientTransport(stdioParams);
 
-        new SampleClient(transport).run();
+        new SampleClient(transport).run();*/
 
     }
 
