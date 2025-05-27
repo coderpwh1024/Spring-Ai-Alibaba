@@ -1,6 +1,6 @@
 spring:
   application:
-    name: spring-ai-alibaba-nacos-mcp-example
+    name: nacos-mcp
   ai:
     mcp:
       server:
@@ -11,12 +11,12 @@ spring:
     alibaba:
       mcp:
         nacos:
-          server-addr:
+          server-addr: http://127.0.0.1:8848
           namespace: public
-          username:
-          password:
+          username: coderpwh_admin
+          password: coderpwh_admin
           registry:
             enabled: true
 
 server:
-  port: 8080
+  port: 9081
