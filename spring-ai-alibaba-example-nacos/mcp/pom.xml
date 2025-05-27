@@ -63,13 +63,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-        <!--    <dependency>
+            <dependency>
                 <groupId>com.alibaba.cloud.ai</groupId>
                 <artifactId>spring-ai-alibaba-bom</artifactId>
                 <version>${spring-ai-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>-->
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

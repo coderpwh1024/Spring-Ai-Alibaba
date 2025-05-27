@@ -1,6 +1,5 @@
 package com.coderpwh;
 
-import com.coderpwh.service.DogService;
 import com.coderpwh.service.OpenMeteoService;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
