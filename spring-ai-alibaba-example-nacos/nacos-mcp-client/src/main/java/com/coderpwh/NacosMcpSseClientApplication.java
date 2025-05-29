@@ -8,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-
 import java.util.Scanner;
 
 /**
@@ -22,10 +21,13 @@ public class NacosMcpSseClientApplication {
     }
 
     @Bean
-    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, @Qualifier("loadbalancedSyncMcpToolCallbacks") ToolCallbackProvider tools, ConfigurableApplicationContext context) {
+    public CommandLineRunner predefinedQuestions(ChatClient.Builder chatClientBuilder, @Qualifier("loadbalancedSyncMcpToolCallbacks") ToolCallbackProvider tools,
+                                                 ConfigurableApplicationContext context) {
 
         return args -> {
-            var chatClient = chatClientBuilder.defaultToolCallbacks(tools.getToolCallbacks()).build();
+            var chatClient = chatClientBuilder
+                    .defaultToolCallbacks(tools.getToolCallbacks())
+                    .build();
 
             Scanner scanner = new Scanner(System.in);
             while (true) {

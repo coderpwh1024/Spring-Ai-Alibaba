@@ -6,7 +6,7 @@ spring:
     name: mcp-client-webflux
   ai:
     openai:
-      api-key: xxxxx0000111111
+      api-key:
       base-url: https://dashscope.aliyuncs.com/compatible-mode
       chat:
         options:
@@ -15,9 +15,9 @@ spring:
       mcp:
         nacos:
           enabled: true
-          server-addr: http://127.0.0.1:8848
-          username: coderpwh_admin
-          password: coderpwh_admin
+          server-addr: 127.0.0.1:8848
+          username: nacos
+          password: nacos
           namespace: 4f4a9275-122a-4f92-9b1c-f6c651dbc0ac
           client:
             sse:
