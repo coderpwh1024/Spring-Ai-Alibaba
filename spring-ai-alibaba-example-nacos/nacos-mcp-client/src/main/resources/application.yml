@@ -15,7 +15,7 @@ spring:
       mcp:
         nacos:
           enabled: true
-          server-addr: 127.0.0.1:8848
+          server-addr: http://127.0.0.1:8848
           username: nacos
           password: nacos
           namespace: 4f4a9275-122a-4f92-9b1c-f6c651dbc0ac
