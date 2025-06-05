@@ -34,7 +34,6 @@ public class Application {
         return args -> {
             new ChainWorkflow(chatClientBuilder.build()).chain(report);
         };
-
     }
 
 
