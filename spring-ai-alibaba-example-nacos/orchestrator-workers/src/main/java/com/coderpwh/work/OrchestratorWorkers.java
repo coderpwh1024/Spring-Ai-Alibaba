@@ -6,6 +6,8 @@ import org.springframework.util.Assert;
 import java.util.List;
 
 /**
+ * 协调器
+ *
  * @author coderpwh
  */
 public class OrchestratorWorkers {
@@ -17,29 +19,28 @@ public class OrchestratorWorkers {
     private final String workerPrompt;
 
     public static final String DEFAULT_ORCHESTRATOR_PROMPT = """
-            Analyze this task and break it down into 2-3 distinct approaches:
+            分析这项任务，并将其分解为2-3种不同的方法：
 
             Task: {task}
 
-            Return your response in this JSON format:
+            以JSON格式返回
             \\{
-            "analysis": "Explain your understanding of the task and which variations would be valuable.
-                         Focus on how each approach serves different aspects of the task.",
+            "analysis": "解释你对任务的理解，以及哪些变化是有价值的。关注每种方法如何服务于任务的不同方面。",
             "tasks": [
             	\\{
             	"type": "formal",
-            	"description": "Write a precise, technical version that emphasizes specifications"
+            	"description": "写一个精确的技术版本，强调规格"
             	\\},
             	\\{
             	"type": "conversational",
-            	"description": "Write an engaging, friendly version that connects with readers"
+            	"description": "写一个吸引人、友好的版本，与读者建立联系"
             	\\}
             ]
             \\}
             """;
 
     public static final String DEFAULT_WORKER_PROMPT = """
-            Generate content based on:
+            生成的内容如下:
             Task: {original_task}
             Style: {task_type}
             Guidelines: {task_description}
@@ -75,6 +76,7 @@ public class OrchestratorWorkers {
     public FinalResponse process(String taskDescription) {
         Assert.hasText(taskDescription, "Task description must not be empty");
 
+         // 协调器
         OrchestratorResponse orchestratorResponse = this.chatClient.prompt()
                 .user(u -> u.text(this.orchestratorPrompt).param("task", taskDescription))
                 .call().entity(OrchestratorResponse.class);
@@ -82,16 +84,19 @@ public class OrchestratorWorkers {
         System.out.println(String.format("\n=== ORCHESTRATOR OUTPUT ===\nANALYSIS: %s\n\nTASKS: %s\n",
                 orchestratorResponse.analysis(), orchestratorResponse.tasks()));
 
+         // work工作
         List<String> workerResponses = orchestratorResponse.tasks()
                 .stream()
                 .map(task -> this.chatClient.prompt()
                         .user(u -> u.text(this.workerPrompt)
                                 .param("original_task", taskDescription)
                                 .param("task_type", task.type())
-                                .param("task_description", task.description())).call().content()).toList();
+                                .param("task_description", task.description()))
+                        .call().content()).toList();
 
         System.out.println("\n=== WORKER OUTPUT ===\n" + workerResponses);
 
+         // 最终返回
         return new FinalResponse(orchestratorResponse.analysis(), workerResponses);
     }
 
