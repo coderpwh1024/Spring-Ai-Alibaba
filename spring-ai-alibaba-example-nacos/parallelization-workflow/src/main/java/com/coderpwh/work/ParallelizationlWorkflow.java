@@ -10,6 +10,8 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 /**
+ * 并行工作流
+ *
  * @author coderpwh
  */
 public class ParallelizationlWorkflow {
@@ -52,7 +54,7 @@ public class ParallelizationlWorkflow {
             executor.shutdown();
         }
 
-       return  null;
+        return null;
     }
 
 

@@ -31,10 +31,10 @@ public class Application {
                 """;
 
         String strOne = """
-                 Customers:
-                 - Price sensitive
-                 - Want better tech
-                  - Environmental concerns
+                Customers:
+                - Price sensitive
+                - Want better tech
+                - Environmental concerns
                 """;
 
         String strTwo = """
