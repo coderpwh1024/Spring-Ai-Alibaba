@@ -35,7 +35,7 @@ public class ParallelizationlWorkflow {
         try {
             List<CompletableFuture<String>> futures = inputs.stream().map(input -> CompletableFuture.supplyAsync(() -> {
                 try {
-                    return chatClient.prompt(prompt + "\nInput: " + input).call().content();
+                    return chatClient.prompt(prompt+"\nInput: " + input).call().content();
                 } catch (Exception e) {
                     throw new RuntimeException("Failed to process input: " + input, e);
                 }
