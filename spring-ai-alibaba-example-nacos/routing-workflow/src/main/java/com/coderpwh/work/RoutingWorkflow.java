@@ -31,19 +31,7 @@ public class RoutingWorkflow {
 
     @SuppressWarnings("null")
     private String determineRoute(String input, Iterable<String> availableRoutes) {
-        System.out.println("\nAvailable routes: " + availableRoutes);
-
-      /*  String selectorPrompt = String.format("""
-                Analyze the input and select the most appropriate support team from these options: %s
-                First explain your reasoning, then provide your selection in this JSON format:
-
-                \\{
-                    "reasoning": "Brief explanation of why this ticket should be routed to a specific team.
-                                Consider key terms, user intent, and urgency level.",
-                    "selection": "The chosen team name"
-                \\}
-
-                Input: %s""", availableRoutes, input);*/
+        System.out.println("\n有效的路由: " + availableRoutes);
 
         String selectorPrompt = String.format("""
                 请分析以下输入内容，并从以下支持团队中选择最合适的一个：%s
@@ -63,7 +51,7 @@ public class RoutingWorkflow {
 
         System.out.println(String.format("路由分析:%s\n选中的路由: %s",
                 routingResponse.reasoning(), routingResponse.selection()));
-
+        System.out.println();
         return routingResponse.selection();
     }
 
