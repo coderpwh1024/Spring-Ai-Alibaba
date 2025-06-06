@@ -33,7 +33,7 @@ public class RoutingWorkflow {
     private String determineRoute(String input, Iterable<String> availableRoutes) {
         System.out.println("\nAvailable routes: " + availableRoutes);
 
-        String selectorPrompt = String.format("""
+      /*  String selectorPrompt = String.format("""
                 Analyze the input and select the most appropriate support team from these options: %s
                 First explain your reasoning, then provide your selection in this JSON format:
 
@@ -43,11 +43,25 @@ public class RoutingWorkflow {
                     "selection": "The chosen team name"
                 \\}
 
-                Input: %s""", availableRoutes, input);
+                Input: %s""", availableRoutes, input);*/
+
+        String selectorPrompt = String.format("""
+                请分析以下输入内容，并从以下支持团队中选择最合适的一个：%s
+                请先解释你的判断依据，然后按照以下 JSON 格式提供你的选择：
+
+                \\{
+                    "reasoning": "简要说明为何将该请求分配给该支持团队。
+                                 请考虑关键词、用户意图以及紧急程度等因素。",
+                    "selection": "所选择的团队名称"
+                \\}
+
+                输入：%s
+                """, availableRoutes, input);
+
 
         RoutingResponse routingResponse = chatClient.prompt(selectorPrompt).call().entity(RoutingResponse.class);
 
-        System.out.println(String.format("Routing Analysis:%s\nSelected route: %s",
+        System.out.println(String.format("路由分析:%s\n选中的路由: %s",
                 routingResponse.reasoning(), routingResponse.selection()));
 
         return routingResponse.selection();
