@@ -17,16 +17,9 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+
     String report = """
-            Q3 Performance Summary:
-            Our customer satisfaction score rose to 92 points this quarter.
-            Revenue grew by 45% compared to last year.
-            Market share is now at 23% in our primary market.
-            Customer churn decreased to 5% from 8%.
-            New user acquisition cost is $43 per user.
-            Product adoption rate increased to 78%.
-            Employee satisfaction is at 87 points.
-            Operating margin improved to 34%.
+            慧慧想开一家咖啡馆，他希望这个咖啡馆既能吸引年轻人，又能兼顾上班族的需求。请帮他设计一个可行的咖啡馆运营方案。
             """;
 
     @Bean

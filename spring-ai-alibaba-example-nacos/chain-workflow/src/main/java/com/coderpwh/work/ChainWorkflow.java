@@ -7,37 +7,16 @@ import org.springframework.ai.chat.client.ChatClient;
  */
 public class ChainWorkflow {
 
-
     private static final String[] DEFAULT_SYSTEM_PROMPTS = {
-
-            // Step 1
             """
-					Extract only the numerical values and their associated metrics from the text.
-					Format each as'value: metric' on a new line.
-					Example format:
-					92: customer satisfaction
-					45%: revenue growth""",
-            // Step 2
+            请分析慧慧开咖啡馆所面临的市场背景、潜在机会和挑战。特别需要关注年轻人和上班族的消费习惯、生活方式与需求偏好。
+            """,
             """
-					Convert all numerical values to percentages where possible.
-					If not a percentage or points, convert to decimal (e.g., 92 points -> 92%).
-					Keep one number per line.
-					Example format:
-					92%: customer satisfaction
-					45%: revenue growth""",
-            // Step 3
+            基于上一步对目标人群的分析，列出一个咖啡馆运营的初步方案，包括选址建议、装修风格、产品定位、营业时间和营销策略等。
+            """,
             """
-					Sort all lines in descending order by numerical value.
-					Keep the format 'value: metric' on each line.
-					Example:
-					92%: customer satisfaction
-					87%: employee satisfaction""",
-            // Step 4
+            请根据前两个步骤的分析，优化并输出一份完整、可执行的咖啡馆运营方案。请包括核心理念、重点运营策略、成本控制建议和预期效益分析。
             """
-					Format the sorted data as a markdown table with columns:
-					| Metric | Value |
-					|:--|--:|
-					| Customer Satisfaction | 92% | """
     };
 
 
@@ -56,7 +35,7 @@ public class ChainWorkflow {
 
 
     public String chain(String userInput) {
-        int step = 0;
+        int step = 1;
 
         String response = userInput;
 
@@ -65,7 +44,7 @@ public class ChainWorkflow {
 
             response = chatClient.prompt(input).call().content();
 
-            System.out.println(String.format("\\nSTEP %s:\\n %s", step++, response));
+            System.out.println(String.format("\nSTEP %s:\n %s", step++, response));
         }
 
         return response;
