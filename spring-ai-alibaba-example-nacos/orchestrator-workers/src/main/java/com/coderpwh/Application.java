@@ -21,7 +21,7 @@ public class Application {
     public CommandLineRunner commandLineRunner(ChatClient.Builder chatClientBuilder){
         var chatClient = chatClientBuilder.build();
         return args -> {
-             new OrchestratorWorkers(chatClient).process("帮助依依找个富婆");
+             new OrchestratorWorkers(chatClient).process("给依依介绍一下富婆对象");
         };
     }
 

@@ -21,7 +21,7 @@ public class OrchestratorWorkers {
     public static final String DEFAULT_ORCHESTRATOR_PROMPT = """
             分析这项任务，并将其分解为2-3种不同的方法：
 
-            Task: {task}
+            任务: {task}
 
             以JSON格式返回
             \\{
@@ -41,9 +41,9 @@ public class OrchestratorWorkers {
 
     public static final String DEFAULT_WORKER_PROMPT = """
             生成的内容如下:
-            Task: {original_task}
-            Style: {task_type}
-            Guidelines: {task_description}
+            任务: {original_task}
+            风格: {task_type}
+            指向: {task_description}
             """;
 
     public static record Task(String type, String description) {
@@ -76,15 +76,15 @@ public class OrchestratorWorkers {
     public FinalResponse process(String taskDescription) {
         Assert.hasText(taskDescription, "Task description must not be empty");
 
-         // 协调器
+        // 协调器
         OrchestratorResponse orchestratorResponse = this.chatClient.prompt()
                 .user(u -> u.text(this.orchestratorPrompt).param("task", taskDescription))
                 .call().entity(OrchestratorResponse.class);
 
-        System.out.println(String.format("\n=== ORCHESTRATOR OUTPUT ===\nANALYSIS: %s\n\nTASKS: %s\n",
+        System.out.println(String.format("\n=== ORCHESTRATOR OUTPUT ===\n分析: %s\n\n任务: %s\n",
                 orchestratorResponse.analysis(), orchestratorResponse.tasks()));
 
-         // work工作
+        // work工作
         List<String> workerResponses = orchestratorResponse.tasks()
                 .stream()
                 .map(task -> this.chatClient.prompt()
@@ -96,7 +96,7 @@ public class OrchestratorWorkers {
 
         System.out.println("\n=== WORKER OUTPUT ===\n" + workerResponses);
 
-         // 最终返回
+        // 最终返回
         return new FinalResponse(orchestratorResponse.analysis(), workerResponses);
     }
 
