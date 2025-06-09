@@ -25,6 +25,7 @@ public class RoutingWorkflow {
             throw new IllegalArgumentException("Selected route '" + routeKey + "' not found in routes map");
         }
 
+        System.out.println("回答信息:");
         return chatClient.prompt(selectedPrompt + "\nInput: " + input).call().content();
     }
 
@@ -36,13 +37,11 @@ public class RoutingWorkflow {
         String selectorPrompt = String.format("""
                 请分析以下输入内容，并从以下支持团队中选择最合适的一个：%s
                 请先解释你的判断依据，然后按照以下 JSON 格式提供你的选择：
-
                 \\{
                     "reasoning": "简要说明为何将该请求分配给该支持团队。
                                  请考虑关键词、用户意图以及紧急程度等因素。",
                     "selection": "所选择的团队名称"
                 \\}
-
                 输入：%s
                 """, availableRoutes, input);
 

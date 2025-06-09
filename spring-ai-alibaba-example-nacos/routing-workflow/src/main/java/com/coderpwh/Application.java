@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -111,10 +110,13 @@ public class Application {
 
             for (String ticket : tickets) {
                 System.out.println("\nTicket " + i++);
-                System.out.println("------------------------------------------------------------");
+                System.out.println("--------------------------------------------------------------------------------------------");
+                System.out.println();
                 System.out.println(ticket);
-                System.out.println("------------------------------------------------------------");
+                System.out.println("");
+                System.out.println("路由信息:");
                 System.out.println(routerWorkflow.route(ticket, supportRoutes));
+                System.out.println("--------------------------------------------------------------------------------------------");
             }
         };
     }
