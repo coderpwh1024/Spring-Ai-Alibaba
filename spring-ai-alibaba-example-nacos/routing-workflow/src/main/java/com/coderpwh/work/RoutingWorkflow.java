@@ -25,7 +25,7 @@ public class RoutingWorkflow {
             throw new IllegalArgumentException("Selected route '" + routeKey + "' not found in routes map");
         }
 
-        System.out.println("回答信息:");
+        System.out.println("--------------------------------------------------------------------------------------------");
         return chatClient.prompt(selectedPrompt + "\nInput: " + input).call().content();
     }
 

@@ -113,6 +113,7 @@ public class Application {
                 System.out.println("--------------------------------------------------------------------------------------------");
                 System.out.println();
                 System.out.println(ticket);
+                System.out.println("--------------------------------------------------------------------------------------------");
                 System.out.println("");
                 System.out.println("路由信息:");
                 System.out.println(routerWorkflow.route(ticket, supportRoutes));
