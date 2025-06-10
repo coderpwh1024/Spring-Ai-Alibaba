@@ -12,31 +12,9 @@ import java.util.List;
 @SuppressWarnings("null")
 public class EvaluatorOptimizer {
 
-
-    /*public static final String DEFAULT_GENERATOR_PROMPT = """
-            Your goal is to complete the task based on the input. If there are feedback
-            from your previous generations, you should reflect on them to improve your solution.
-
-            CRITICAL: Your response must be a SINGLE LINE of valid JSON with NO LINE BREAKS except those explicitly escaped with \\n.
-            Here is the exact format to follow, including all quotes and braces:
-
-            {"thoughts":"Brief description here","response":"public class Example {\\n    // Code here\\n}"}
-
-            Rules for the response field:
-            1. ALL line breaks must use \\n
-            2. ALL quotes must use \\"
-            3. ALL backslashes must be doubled: \\
-            4. NO actual line breaks or formatting - everything on one line
-            5. NO tabs or special characters
-            6. Java code must be complete and properly escaped
-
-            Example of properly formatted response:
-            {"thoughts":"Implementing counter","response":"public class Counter {\\n    private int count;\\n    public Counter() {\\n        count = 0;\\n    }\\n    public void increment() {\\n        count++;\\n    }\\n}"}
-
-            Follow this format EXACTLY - your response must be valid JSON on a single line.
-            """;
+    /**
+     * 生成部分提示词
      */
-
     public static final String DEFAULT_GENERATOR_PROMPT = """
             你的目标是根据输入完成任务。如果有来自你先前生成内容的反馈，你应当参考这些反馈来优化你的解决方案。
 
@@ -59,20 +37,9 @@ public class EvaluatorOptimizer {
             请**严格**遵循该格式 - 你的输出必须是**一行有效 JSON 字符串**。
             """;
 
-
-   /* public static final String DEFAULT_EVALUATOR_PROMPT = """
-            Evaluate this code implementation for correctness, time complexity, and best practices.
-            Ensure the code have proper javadoc documentation.
-            Respond with EXACTLY this JSON format on a single line:
-
-            {"evaluation":"PASS, NEEDS_IMPROVEMENT, or FAIL", "feedback":"Your feedback here"}
-
-            The evaluation field must be one of: "PASS", "NEEDS_IMPROVEMENT", "FAIL"
-            Use "PASS" only if all criteria are met with no improvements needed.
-            """;
-
-    */
-
+    /***
+     * 评估部分提示词
+     */
     public static final String DEFAULT_EVALUATOR_PROMPT = """
             请对以下代码实现进行评估，考虑以下方面：正确性、时间复杂度和最佳实践。
             请确保代码包含适当的 Javadoc 文档。
@@ -86,9 +53,15 @@ public class EvaluatorOptimizer {
 
 
     public static record Generation(String thoughts, String response) {
+
     }
 
 
+    /***
+     * 评估实体
+     * @param evaluation
+     * @param feedback
+     */
     public static record EvaluationResponse(Evaluation evaluation, String feedback) {
         public enum Evaluation {
             PASS, NEEDS_IMPROVEMENT, FAIL
@@ -128,12 +101,16 @@ public class EvaluatorOptimizer {
 
     public RefinedResponse loop(String task, String context, List<String> memory, List<Generation> chainOfThought) {
 
+        // 1.生成部分
         Generation generation = generate(task, context);
         memory.add(generation.response());
         chainOfThought.add(generation);
 
+        // 2.评估部分
         EvaluationResponse evaluationResponse = evaluate(generation.response(), task);
 
+
+         //  3.通过则结束递归
         if (evaluationResponse.evaluation().equals(EvaluationResponse.Evaluation.PASS)) {
             return new RefinedResponse(generation.response(), chainOfThought);
         }
@@ -145,12 +122,25 @@ public class EvaluatorOptimizer {
         }
         newContext.append("\\nFeedback:").append(evaluationResponse.feedback());
 
+        // 3.递归调用
         return loop(task, newContext.toString(), memory, chainOfThought);
     }
 
-    private Generation generate(String task, String context) {
-        Generation generationResponse = chatClient.prompt().user(u -> u.text("{prompt}\\n{context}\\nTask: {task}").param("prompt", this.generatorPrompt).param("context", context).param("task", task)).call().entity(Generation.class);
 
+    /***
+     * 生成
+     * @param task
+     * @param context
+     * @return
+     */
+    private Generation generate(String task, String context) {
+        Generation generationResponse = chatClient.prompt()
+                .user(u -> u.text("{prompt}\\n{context}\\nTask: {task}")
+                        .param("prompt", this.generatorPrompt)
+                        .param("context", context)
+                        .param("task", task))
+                .call()
+                .entity(Generation.class);
         System.out.println(String.format("\n=== 生成输出 ===\n意图: %s\n\n返回结果:\n %s\n", generationResponse.thoughts(), generationResponse.response()));
         return generationResponse;
     }
@@ -164,7 +154,13 @@ public class EvaluatorOptimizer {
      */
     private EvaluationResponse evaluate(String content, String task) {
 
-        EvaluationResponse evaluationResponse = chatClient.prompt().user(u -> u.text("{prompt}\nOriginal task: {task}\nContent to evaluate: {content}").param("prompt", this.evaluatorPrompt).param("task", task).param("content", content)).call().entity(EvaluationResponse.class);
+        EvaluationResponse evaluationResponse = chatClient.prompt()
+                .user(u -> u.text("{prompt}\nOriginal task: {task}\nContent to evaluate: {content}")
+                        .param("prompt", this.evaluatorPrompt)
+                        .param("task", task)
+                        .param("content", content))
+                .call()
+                .entity(EvaluationResponse.class);
 
         System.out.println(String.format("\n=== 评估输出:===\n评估: %s\n\n反馈: %s\n", evaluationResponse.evaluation(), evaluationResponse.feedback()));
 
