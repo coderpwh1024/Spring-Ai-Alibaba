@@ -9,7 +9,7 @@ spring:
     vectorstore:
       milvus:
         client:
-          host: http://127.0.0.1 # default: localhost
+          host: localhost # default: localhost
           port: 19530 # default: 19530
           username: root # default: root
           password: milvus # default: milvus
