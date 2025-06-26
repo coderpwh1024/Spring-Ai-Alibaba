@@ -13,6 +13,7 @@ spring:
           port: 19530 # default: 19530
           username: root # default: root
           password: milvus # default: milvus
+
         databaseName: default  # default: default
         collectionName: vector_store # default: vector_store
         embeddingDimension: 1536 # default: 1536
