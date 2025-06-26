@@ -47,7 +47,7 @@ public class RagController {
     }
 
 
-    @RequestMapping(value = "/generation", method = RequestMethod.GET)
+    @RequestMapping(value = "/chat", method = RequestMethod.GET)
     public Flux<String> generation(@RequestParam("prompt") String userInput, HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
 
