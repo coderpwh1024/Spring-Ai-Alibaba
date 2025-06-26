@@ -77,7 +77,6 @@ public class TransformerController {
                 SummaryMetadataEnricher.SummaryType.CURRENT,
                 SummaryMetadataEnricher.SummaryType.PREVIOUS);
         SummaryMetadataEnricher summaryMetadataEnricher = new SummaryMetadataEnricher(this.chatModel, summaryTypes);
-
         return summaryMetadataEnricher.apply(this.documents);
     }
 
