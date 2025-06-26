@@ -7,7 +7,7 @@ spring:
 
   ai:
     dashscope:
-      api-key: ${DASHSCOPE_API_KEY}
+      api-key:
       base-url: https://dashscope.aliyuncs.com/
       chat:
         options:
