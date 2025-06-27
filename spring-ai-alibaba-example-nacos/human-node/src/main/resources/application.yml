@@ -5,7 +5,7 @@ spring:
     name: human-node
   ai:
     dashscope:
-      api-key: xxxxxxx
+      api-key:
       chat:
         options:
           model: qwen-max
