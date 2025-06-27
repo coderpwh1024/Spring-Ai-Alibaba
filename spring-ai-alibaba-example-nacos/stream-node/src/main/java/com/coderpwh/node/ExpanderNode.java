@@ -18,8 +18,9 @@ import java.util.Map;
  * @author coderpwh
  */
 public class ExpanderNode implements NodeAction {
-    
-    private static final PromptTemplate DEFAULT_PROMPT_TEMPLATE = new PromptTemplate("You are an expert at information retrieval and search optimization.\nYour task is to generate {number} different versions of the given query.\n\nEach variant must cover different perspectives or aspects of the topic,\nwhile maintaining the core intent of the original query. The goal is to\nexpand the search space and improve the chances of finding relevant information.\n\nDo not explain your choices or add any other text.\nProvide the query variants separated by newlines.\n\nOriginal query: {query}\n\nQuery variants:\n");
+
+    private static final PromptTemplate DEFAULT_PROMPT_TEMPLATE =
+            new PromptTemplate("You are an expert at information retrieval and search optimization.\nYour task is to generate {number} different versions of the given query.\n\nEach variant must cover different perspectives or aspects of the topic,\nwhile maintaining the core intent of the original query. The goal is to\nexpand the search space and improve the chances of finding relevant information.\n\nDo not explain your choices or add any other text.\nProvide the query variants separated by newlines.\n\nOriginal query: {query}\n\nQuery variants:\n");
 
     private final ChatClient chatClient;
 
@@ -34,7 +35,6 @@ public class ExpanderNode implements NodeAction {
     @Override
     public Map<String, Object> apply(OverAllState state) throws Exception {
         String query = state.value("query", "");
-
         Integer expanderNumber = state.value("expanderNumber", NUMBER);
 
         Flux<ChatResponse> chatResponseFlux = this.chatClient.prompt()
@@ -51,7 +51,8 @@ public class ExpanderNode implements NodeAction {
                     String text = response.getResult().getOutput().getText();
                     List<String> queryVariants = Arrays.asList(text.split("\n"));
                     return Map.of("expander_content", queryVariants);
-                }).build(chatResponseFlux);
+                })
+                .build(chatResponseFlux);
         return Map.of("expander_content", generator);
     }
 
