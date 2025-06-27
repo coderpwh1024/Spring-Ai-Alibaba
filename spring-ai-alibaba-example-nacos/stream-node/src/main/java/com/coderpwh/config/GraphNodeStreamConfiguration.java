@@ -46,13 +46,13 @@ public class GraphNodeStreamConfiguration {
                 .addEdge(StateGraph.START, "expander")
                 .addEdge("expander", StateGraph.END);
 
-
+        // Graph 打印
         GraphRepresentation representation = stateGraph.getGraph(GraphRepresentation.Type.PLANTUML, "expander flow");
         logger.info("\n=== expander UML Flow ===");
         logger.info(representation.content());
         logger.info("==================================\n");
 
-        return  stateGraph;
+        return stateGraph;
 
 
     }

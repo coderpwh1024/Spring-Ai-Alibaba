@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 实时检索Node 节点
  * @author coderpwh
  */
 public class ExpanderNode implements NodeAction {
