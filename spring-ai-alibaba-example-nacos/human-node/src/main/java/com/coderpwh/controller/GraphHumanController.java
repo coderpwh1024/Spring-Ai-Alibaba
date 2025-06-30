@@ -62,6 +62,7 @@ public class GraphHumanController {
         Sinks.Many<ServerSentEvent<String>> sink = Sinks.many().unicast().onBackpressureBuffer();
 
         AsyncGenerator<NodeOutput> resultFuture = compiledGraph.stream(objectMap, runnableConfig);
+        // 执行流式
         graphProcess.processStream(resultFuture, sink);
 
         return sink.asFlux().doOnCancel(() -> logger.info("Client disconnected from stream"))
