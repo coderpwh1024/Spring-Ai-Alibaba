@@ -1,5 +1,6 @@
 package com.coderpwh.config;
 
+import com.alibaba.cloud.ai.graph.CompiledGraph;
 import com.alibaba.cloud.ai.graph.OverAllState;
 import com.alibaba.cloud.ai.graph.OverAllStateFactory;
 import com.alibaba.cloud.ai.graph.StateGraph;
@@ -9,6 +10,7 @@ import com.alibaba.cloud.ai.graph.agent.ReflectAgent;
 import com.alibaba.cloud.ai.graph.node.LlmNode;
 import com.alibaba.cloud.ai.graph.state.strategy.AppendStrategy;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.ai.chat.messages.Message;
@@ -16,6 +18,7 @@ import org.springframework.ai.chat.messages.Message;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.UnaryOperator;
 
 /**
  * @author coderpwh
@@ -98,26 +101,26 @@ public class RelectionAutoconfiguration {
 
         private final String NODE_ID = "judge_response";
 
-        private  SystemPromptTemplate systemPromptTemplate;
+        private SystemPromptTemplate systemPromptTemplate;
 
         private static final String CLASSIFIER_PROMPT_TEMPLATE = """
-					You are a teacher grading a student's essay submission. Provide detailed feedback and revision suggestions for the essay.
+                	You are a teacher grading a student's essay submission. Provide detailed feedback and revision suggestions for the essay.
 
-					Your feedback should cover the following aspects:
+                	Your feedback should cover the following aspects:
 
-					- Length : Is the essay sufficiently developed? Does it meet the required length or need expansion/shortening?
-					- Depth : Are the ideas well-developed? Is there sufficient analysis, evidence, or explanation?
-					- Structure : Is the organization logical and clear? Are the introduction, transitions, and conclusion effective?
-					- Style and Tone : Is the writing style appropriate for the purpose and audience? Is the tone consistent and professional?
-					- Language Use : Are vocabulary, grammar, and sentence structure accurate and varied?
-					- Focus only on providing actionable suggestions for improvement. Do not include grades, scores, or overall summary evaluations.
+                	- Length : Is the essay sufficiently developed? Does it meet the required length or need expansion/shortening?
+                	- Depth : Are the ideas well-developed? Is there sufficient analysis, evidence, or explanation?
+                	- Structure : Is the organization logical and clear? Are the introduction, transitions, and conclusion effective?
+                	- Style and Tone : Is the writing style appropriate for the purpose and audience? Is the tone consistent and professional?
+                	- Language Use : Are vocabulary, grammar, and sentence structure accurate and varied?
+                	- Focus only on providing actionable suggestions for improvement. Do not include grades, scores, or overall summary evaluations.
 
-					Please respond in Chinese .
-				""";
+                	Please respond in Chinese .
+                """;
 
-        public JudgeGraphNode(ChatClient chatClient){
+        public JudgeGraphNode(ChatClient chatClient) {
             this.systemPromptTemplate = new SystemPromptTemplate(CLASSIFIER_PROMPT_TEMPLATE);
-            this.llmNode= LlmNode.builder()
+            this.llmNode = LlmNode.builder()
                     .systemPromptTemplate(systemPromptTemplate.render())
                     .chatClient(chatClient)
                     .messagesKey(ReflectAgent.MESSAGES)
@@ -146,8 +149,41 @@ public class RelectionAutoconfiguration {
 
 
         @Override
-        public Map<String, Object> apply(OverAllState state) throws Exception {
-            return null;
+        public Map<String, Object> apply(OverAllState allState) throws Exception {
+
+            List<Message> messages = (List<Message>) allState.value(ReflectAgent.MESSAGES).get();
+
+            OverAllStateFactory stateFactory = () -> {
+                OverAllState state = new OverAllState();
+                state.registerKeyAndStrategy(ReflectAgent.MESSAGES, new AppendStrategy());
+                return state;
+            };
+
+            StateGraph stateGraph = new StateGraph(stateFactory).addNode(this.NODE_ID, AsyncNodeAction.node_async(llmNode))
+                    .addEdge(StateGraph.START, this.NODE_ID)
+                    .addEdge(this.NODE_ID, StateGraph.END);
+
+            CompiledGraph compile = stateGraph.compile();
+
+            OverAllState invokeState = compile.invoke(Map.of(ReflectAgent.MESSAGES, messages)).get();
+
+            UnaryOperator<List<Message>> convertLastToUserMessage = messageList -> {
+
+                int size = messageList.size();
+                if (size == 0) {
+                    return messageList;
+                }
+                Message last = messageList.get(size - 1);
+
+                messageList.set(size - 1, new UserMessage(last.getText()));
+                return messageList;
+            };
+
+            List<Message> reactMessages = (List<Message>) invokeState.value(ReflectAgent.MESSAGES).orElseThrow();
+            convertLastToUserMessage.apply(reactMessages);
+
+            return Map.of(ReflectAgent.MESSAGES, reactMessages);
+
         }
 
     }
