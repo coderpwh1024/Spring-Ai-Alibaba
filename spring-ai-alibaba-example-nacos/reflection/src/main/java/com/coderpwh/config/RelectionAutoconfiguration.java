@@ -7,11 +7,16 @@ import com.alibaba.cloud.ai.graph.StateGraph;
 import com.alibaba.cloud.ai.graph.action.AsyncNodeAction;
 import com.alibaba.cloud.ai.graph.action.NodeAction;
 import com.alibaba.cloud.ai.graph.agent.ReflectAgent;
+import com.alibaba.cloud.ai.graph.exception.GraphStateException;
 import com.alibaba.cloud.ai.graph.node.LlmNode;
 import com.alibaba.cloud.ai.graph.state.strategy.AppendStrategy;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
+import org.springframework.ai.openai.OpenAiChatOptions;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.ai.chat.messages.Message;
 
@@ -186,6 +191,23 @@ public class RelectionAutoconfiguration {
 
         }
 
+    }
+
+    @Bean
+    public CompiledGraph reflectGraph(ChatModel chatModel) throws GraphStateException {
+
+        ChatClient chatClient = ChatClient.builder(chatModel)
+                .defaultAdvisors(new SimpleLoggerAdvisor())
+                .defaultOptions(OpenAiChatOptions.builder().internalToolExecutionEnabled(false).build())
+                .build();
+
+        AssistantGraphNode assistantGraphNode = AssistantGraphNode.builder().chatClient(chatClient).build();
+
+        JudgeGraphNode judgeGraphNode = JudgeGraphNode.builder().chatClient(chatClient).build();
+
+        ReflectAgent reflectAgent = ReflectAgent.builder().graph(assistantGraphNode).reflection(judgeGraphNode).maxIterations(2).build();
+
+        return  reflectAgent.getAndCompileGraph();
     }
 
 
