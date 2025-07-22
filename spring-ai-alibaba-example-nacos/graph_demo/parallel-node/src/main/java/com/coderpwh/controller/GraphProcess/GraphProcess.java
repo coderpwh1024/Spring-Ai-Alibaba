@@ -35,7 +35,6 @@ public class GraphProcess {
     }
 
     public void processStream(AsyncGenerator<NodeOutput> generator, Sinks.Many<ServerSentEvent<String>> sink) {
-
         executor.submit(() -> {
             generator.forEachAsync(output -> {
                 try {
