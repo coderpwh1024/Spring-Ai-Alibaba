@@ -27,18 +27,20 @@ public class ProductController {
 
     private final CompiledGraph compiledGraph;
 
+
     public ProductController(@Qualifier("productAnalysisGraph") StateGraph productAnalysisGraph) throws GraphStateException {
         SaverConfig saverConfig = SaverConfig.builder().register(SaverConstant.MEMORY, new MemorySaver()).build();
         this.compiledGraph = productAnalysisGraph.compile(CompileConfig.builder().saverConfig(saverConfig).build());
     }
 
 
+
     @PostMapping("/product/enrich")
     public Product enrichProduct(@RequestBody String productDesc) throws GraphRunnerException {
-        Map<String,Object>  initialState = Map.of("productDesc",productDesc);
+        Map<String, Object> initialState = Map.of("productDesc", productDesc);
         RunnableConfig runnableConfig = RunnableConfig.builder().build();
-        Optional<OverAllState> invoke = compiledGraph.invoke(initialState,runnableConfig);
-        return  (Product) invoke.get().value("finalProduct").orElseThrow();
+        Optional<OverAllState> invoke = compiledGraph.invoke(initialState, runnableConfig);
+        return (Product) invoke.get().value("finalProduct").orElseThrow();
     }
 
 

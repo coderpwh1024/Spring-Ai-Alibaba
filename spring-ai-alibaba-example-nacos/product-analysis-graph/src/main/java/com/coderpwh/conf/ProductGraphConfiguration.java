@@ -26,7 +26,7 @@ public class ProductGraphConfiguration {
 
 
     @Bean
-    public StateGraph productGraph(ChatClient.Builder chatClientBuilder) throws GraphStateException {
+    public StateGraph productAnalysisGraph(ChatClient.Builder chatClientBuilder) throws GraphStateException {
         ChatClient client = chatClientBuilder.build();
 
         KeyStrategyFactory keyStrategyFactory = () -> {
