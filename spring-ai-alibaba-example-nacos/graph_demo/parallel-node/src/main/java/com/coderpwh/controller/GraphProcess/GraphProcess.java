@@ -22,15 +22,13 @@ import java.util.concurrent.Executors;
  */
 public class GraphProcess {
 
-
     private static final Logger logger = LoggerFactory.getLogger(GraphProcess.class);
-
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     private CompiledGraph compiledGraph;
 
-    private GraphProcess(CompiledGraph compiledGraph) {
+    public GraphProcess(CompiledGraph compiledGraph) {
         this.compiledGraph = compiledGraph;
     }
 
