@@ -1,9 +1,11 @@
 package com.coderpwh.conf;
 
+import com.alibaba.cloud.ai.graph.GraphRepresentation;
 import com.alibaba.cloud.ai.graph.KeyStrategy;
 import com.alibaba.cloud.ai.graph.KeyStrategyFactory;
 import com.alibaba.cloud.ai.graph.StateGraph;
 import com.alibaba.cloud.ai.graph.action.NodeAction;
+import com.alibaba.cloud.ai.graph.exception.GraphStateException;
 import com.alibaba.cloud.ai.graph.state.strategy.ReplaceStrategy;
 import com.coderpwh.model.Product;
 import org.springframework.ai.chat.client.ChatClient;
@@ -13,6 +15,9 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.alibaba.cloud.ai.graph.StateGraph.START;
+import static com.alibaba.cloud.ai.graph.action.AsyncNodeAction.node_async;
+
 /**
  * @author coderpwh
  */
@@ -21,7 +26,7 @@ public class ProductGraphConfiguration {
 
 
     @Bean
-    public StateGraph productGraph(ChatClient.Builder chatClientBuilder) {
+    public StateGraph productGraph(ChatClient.Builder chatClientBuilder) throws GraphStateException {
         ChatClient client = chatClientBuilder.build();
 
         KeyStrategyFactory keyStrategyFactory = () -> {
@@ -48,12 +53,31 @@ public class ProductGraphConfiguration {
         };
 
 
+        NodeAction mergeNode = state -> {
+            String slogan = (String) state.value("slogan").orElseThrow();
+            Product productSpec = (Product) state.value("productSpec").orElseThrow();
+            Product finalProduct = new Product(slogan, productSpec.material(), productSpec.colors(), productSpec.season());
+            return Map.of("finalProduct", finalProduct);
+        };
+
+        StateGraph stateGraph = new StateGraph("ProductAnalysisGraph", keyStrategyFactory);
+        stateGraph
+                .addNode("marketingCopy", node_async(marketingCopyNode))
+                .addNode("specificationExtraction", node_async(specificationExtractionNode))
+                .addNode("merge", node_async(mergeNode))
+                .addEdge(START, "marketingCopy")
+                .addEdge(START, "specificationExtraction")
+                .addEdge("marketingCopy", "merge")
+                .addEdge("specificationExtraction", "merge")
+                .addEdge("merge", StateGraph.END);
 
 
+        GraphRepresentation representation = stateGraph.getGraph(GraphRepresentation.Type.PLANTUML, "Product Analysis Graph");
+        System.out.println("\n=== Product Analysis Graph UML Flow ===");
+        System.out.println(representation.content());
+        System.out.println("======================================\n");
 
-
-
-         return  null;
+        return stateGraph;
     }
 
 
