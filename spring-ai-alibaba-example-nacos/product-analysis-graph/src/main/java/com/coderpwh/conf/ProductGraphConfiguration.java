@@ -67,7 +67,7 @@ public class ProductGraphConfiguration {
          */
         NodeAction mergeNode = state -> {
             String slogan = (String) state.value("slogan").orElseThrow();
-            Product productDesc = (Product) state.value("productDesc").orElseThrow();
+            Product productDesc = (Product) state.value("productSpec").orElseThrow();
             Product finalProduct = new Product(slogan, productDesc.material(), productDesc.colors(), productDesc.season());
             return Map.of("finalProduct", finalProduct);
         };
