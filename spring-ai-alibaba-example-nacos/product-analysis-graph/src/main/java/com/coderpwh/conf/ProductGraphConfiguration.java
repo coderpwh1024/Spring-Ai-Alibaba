@@ -11,6 +11,7 @@ import com.coderpwh.model.Product;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.tukaani.xz.rangecoder.RangeEncoderToBuffer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,13 +40,19 @@ public class ProductGraphConfiguration {
         };
 
 
+        /***
+         * slogan  node
+         */
         NodeAction marketingCopyNode = state -> {
             String productDesc = (String) state.value("productDesc").orElseThrow();
-            String slogan = client.prompt().user("Generate a catchy slogan for a product with the following description: " + productDesc).call().content();
+            String slogan = client.prompt().user("Generate a catchy slogan for a product with the following description:" + productDesc).call().content();
             return Map.of("slogan", slogan);
         };
 
 
+        /***
+         *  product信息 node
+         */
         NodeAction specificationExtractionNode = state -> {
             String productDesc = (String) state.value("productDesc").orElseThrow();
             Product product = client.prompt().user("Extract product specifications from the following description: " + productDesc).call().entity(Product.class);
@@ -53,12 +60,18 @@ public class ProductGraphConfiguration {
         };
 
 
+        /***
+         * slogan(描述)
+         * productDesc(商品信息)
+         * 合并 node
+         */
         NodeAction mergeNode = state -> {
             String slogan = (String) state.value("slogan").orElseThrow();
-            Product productSpec = (Product) state.value("productSpec").orElseThrow();
-            Product finalProduct = new Product(slogan, productSpec.material(), productSpec.colors(), productSpec.season());
+            Product productDesc = (Product) state.value("productDesc").orElseThrow();
+            Product finalProduct = new Product(slogan, productDesc.material(), productDesc.colors(), productDesc.season());
             return Map.of("finalProduct", finalProduct);
         };
+
 
         StateGraph stateGraph = new StateGraph("ProductAnalysisGraph", keyStrategyFactory);
         stateGraph
