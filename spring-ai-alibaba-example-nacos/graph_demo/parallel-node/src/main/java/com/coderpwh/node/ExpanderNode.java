@@ -2,6 +2,7 @@ package com.coderpwh.node;
 
 import com.alibaba.cloud.ai.graph.NodeOutput;
 import com.alibaba.cloud.ai.graph.OverAllState;
+import com.alibaba.cloud.ai.graph.action.NodeAction;
 import com.alibaba.cloud.ai.graph.async.AsyncGenerator;
 import com.alibaba.cloud.ai.graph.streaming.StreamingChatGenerator;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import java.util.Map;
 /**
  * @author coderpwh
  */
-public class ExpanderNode {
+public class ExpanderNode implements NodeAction {
 
     private static final Logger logger = LoggerFactory.getLogger(ExpanderNode.class);
 
@@ -29,19 +30,20 @@ public class ExpanderNode {
     private final Integer NUMBER = 3;
 
 
-    public ExpanderNode(ChatClient chatClient) {
-        this.chatClient = chatClient;
+    public ExpanderNode(ChatClient.Builder chatClientBuilder) {
+        this.chatClient = chatClientBuilder.build();
     }
 
 
+    @Override
     public Map<String, Object> apply(OverAllState state) {
         logger.info("expander node is running");
 
         String expandStatus = state.value("expand_status", "");
         logger.info("Current expand_status: {}", expandStatus);
 
-        if(!"assigned".equals(expandStatus)){
-            return  Map.of();
+        if (!"assigned".equals(expandStatus)) {
+            return Map.of();
         }
 
         String query = state.value("query", "");
@@ -50,21 +52,21 @@ public class ExpanderNode {
         logger.info("Calling LLM for expansion, setting status to processing");
 
         Flux<ChatResponse> chatResponseFlux = this.chatClient.prompt()
-                .user((user)->user.text(DEFAULT_PROMPT_TEMPLATE.getTemplate())
-                        .param("number",expandNumber)
-                        .param("query",query))
+                .user((user) -> user.text(DEFAULT_PROMPT_TEMPLATE.getTemplate())
+                        .param("number", expandNumber)
+                        .param("query", query))
                 .stream().chatResponse();
 
         AsyncGenerator<? extends NodeOutput> generator = StreamingChatGenerator.builder()
                 .startingNode("expander_llm_stream")
                 .startingState(state)
-                .mapResult(reponse->{
+                .mapResult(reponse -> {
                     String text = reponse.getResult().getOutput().getText();
                     List<String> queryVariants = Arrays.asList(text.split("\n"));
                     return Map.of("expander_content", queryVariants, "expand_status", "completed");
                 }).build(chatResponseFlux);
 
-        return  Map.of("expander_content",generator,"expand_status","processing");
+        return Map.of("expander_content", generator, "expand_status", "processing");
     }
 
 

@@ -29,8 +29,8 @@ public class TranslateNode implements NodeAction {
 
     private final String TARGET_LANGUAGE = "English";
 
-    public TranslateNode(ChatClient chatClient) {
-        this.chatClient = chatClient;
+    public TranslateNode(ChatClient.Builder chatClientBuilder) {
+        this.chatClient=chatClientBuilder.build();
     }
 
     @Override
