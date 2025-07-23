@@ -1,10 +1,14 @@
 package com.coderpwh.graph.conf;
 
+import com.alibaba.cloud.ai.graph.GraphRepresentation;
+import com.alibaba.cloud.ai.graph.KeyStrategy;
+import com.alibaba.cloud.ai.graph.KeyStrategyFactory;
 import com.alibaba.cloud.ai.graph.OverAllState;
 import com.alibaba.cloud.ai.graph.StateGraph;
 import com.alibaba.cloud.ai.graph.action.EdgeAction;
 import com.alibaba.cloud.ai.graph.action.NodeAction;
 import com.alibaba.cloud.ai.graph.exception.GraphStateException;
+import com.alibaba.cloud.ai.graph.state.strategy.ReplaceStrategy;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.model.ChatModel;
@@ -13,8 +17,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
+import static com.alibaba.cloud.ai.graph.StateGraph.END;
+import static com.alibaba.cloud.ai.graph.StateGraph.START;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.alibaba.cloud.ai.graph.action.AsyncEdgeAction.edge_async;
+import static com.alibaba.cloud.ai.graph.action.AsyncNodeAction.node_async;
 
 /**
  * @author coderpwh
@@ -28,9 +38,37 @@ public class WritingAssistantAutoconfiguration {
 
         ChatClient chatClient = ChatClient.builder(chatModel).defaultAdvisors(new SimpleLoggerAdvisor()).build();
 
+        KeyStrategyFactory keyStrategyFactory = () -> {
 
-        return null;
+            HashMap<String, KeyStrategy> keyStrategyMap = new HashMap<>();
 
+            keyStrategyMap.put("original_text", new ReplaceStrategy());
+            keyStrategyMap.put("summary", new ReplaceStrategy());
+            keyStrategyMap.put("summary_feedback", new ReplaceStrategy());
+            keyStrategyMap.put("reworded", new ReplaceStrategy());
+            keyStrategyMap.put("title", new ReplaceStrategy());
+            return keyStrategyMap;
+        };
+
+        StateGraph stateGraph = new StateGraph(keyStrategyFactory)
+                .addNode("summarizer", node_async(new SummarizerNode(chatClient)))
+                .addNode("feedback_classifier", node_async(new SummaryFeedbackClassifierNode(chatClient, "summary")))
+                .addNode("reworder", node_async(new RewordingNode(chatClient)))
+                .addNode("title_generator", node_async(new TitleGeneratorNode(chatClient)))
+
+                .addEdge(START, "summarizer")
+                .addEdge("summarizer", "feedback_classifier")
+                .addConditionalEdges("feedback_classifier", edge_async(new FeedbackDispatcher()), Map.of("positive", "reworder", "negative", "summarizer"))
+                .addEdge("reworder", "title_generator")
+                .addEdge("title_generator", END);
+
+
+        GraphRepresentation representation = stateGraph.getGraph(GraphRepresentation.Type.PLANTUML, "Writing Assistant flow");
+        System.out.println("\n=== Writing Assistant UML Flow ===");
+        System.out.println(representation.content());
+        System.out.println("==================================\n");
+
+        return stateGraph;
     }
 
 
@@ -152,8 +190,8 @@ public class WritingAssistantAutoconfiguration {
             ChatResponse chatResponse = chatClient.prompt(prompt).call().chatResponse();
             String title = chatResponse.getResult().getOutput().getText();
 
-            Map<String,Object> result = new HashMap<>();
-            result.put("title",title);
+            Map<String, Object> result = new HashMap<>();
+            result.put("title", title);
             return result;
         }
     }
@@ -162,13 +200,13 @@ public class WritingAssistantAutoconfiguration {
     /***
      * 反馈分类-边
      */
-    static class FeedbackClassifierNode implements EdgeAction {
+    static class FeedbackDispatcher implements EdgeAction {
         @Override
-        public String  apply(OverAllState state) throws Exception {
-           String feedback = (String) state.value("summary_feedback").orElse("");
-           if(feedback.contains("positive")){
-               return  "positive";
-           }
+        public String apply(OverAllState state) throws Exception {
+            String feedback = (String) state.value("summary_feedback").orElse("");
+            if (feedback.contains("positive")) {
+                return "positive";
+            }
             return "negative";
         }
     }
