@@ -36,7 +36,7 @@ import java.util.Optional;
  * @author coderpwh
  */
 @RestController
-@RequestMapping("bigtool")
+@RequestMapping(value = "/bigtool")
 public class BigToolController {
 
     private static final Logger logger = LoggerFactory.getLogger(BigToolController.class);
@@ -103,9 +103,9 @@ public class BigToolController {
     }
 
 
-    @GetMapping("/search'")
+    @GetMapping(value = "/search")
     public String search(String query) throws GraphRunnerException {
-        Optional<OverAllState> invoke = compiledGraph.invoke(Map.of(Constant.INPUT_KEY, query, Constant.HIT_TOOL, ""));
+        Optional<OverAllState> invoke = compiledGraph.invoke(Map.of(Constant.INPUT_KEY, query, Constant.TOOL_LIST, documents));
         return invoke.get().value("solution").get().toString();
     }
 
