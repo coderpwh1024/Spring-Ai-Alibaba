@@ -30,7 +30,7 @@ public class VectorStoreService {
         vectorStore.add(documents);
     }
 
-    public List<Document> similaritySearch(String query, int k) {
+    public List<Document> search(String query, int k) {
         return vectorStore.similaritySearch(SearchRequest.builder().query(query).topK(k).build());
     }
 
