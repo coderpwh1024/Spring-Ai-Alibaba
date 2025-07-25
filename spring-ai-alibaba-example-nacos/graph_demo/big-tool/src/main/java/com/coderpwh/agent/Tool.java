@@ -11,13 +11,13 @@ public class Tool {
 
     private Function<Object[], Object> function;
 
-    private Class<?>[] paramTypes;
+    private Class<?>[] parameterTypes;
 
-    public Tool(String name, String description, Function<Object[], Object> function, Class<?>[] paramTypes) {
+    public Tool(String name, String description, Function<Object[], Object> function, Class<?>[] parameterTypes) {
         this.name = name;
         this.description = description;
         this.function = function;
-        this.paramTypes = paramTypes;
+        this.parameterTypes = parameterTypes;
     }
 
 
@@ -38,8 +38,8 @@ public class Tool {
         return function;
     }
 
-    public Class<?>[] getParamTypes() {
-        return paramTypes;
+    public Class<?>[] getParameterTypes() {
+        return parameterTypes;
     }
 
     @Override
