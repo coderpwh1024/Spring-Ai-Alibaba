@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * @author coderpwh
+ */
 @RestController
 @RequestMapping("/api/documents")
 @CrossOrigin(origins = "*")
@@ -62,12 +65,30 @@ public class DocumentController {
     }
 
     @GetMapping("/{documentId}")
-    public CompletableFuture<ResponseEntity<ApiResponse<Document>>> getDocument(
+    public CompletableFuture<ResponseEntity<? extends ApiResponse<? extends Object>>> getDocument(
             @PathVariable String documentId) {
         
         logger.info("Retrieving document with ID: {}", documentId);
-        
+
+
         return ragService.getDocument(documentId)
+                .thenApply(document -> {
+                    if (document != null) {
+                        logger.info("Document found: {}", documentId);
+                        return ResponseEntity.ok(ApiResponse.success(document));
+                    } else {
+                        logger.warn("Document not found: {}", documentId);
+                        return ResponseEntity.status(404).body(ApiResponse.error("Document not found"));
+                    }
+                })
+                .exceptionally(throwable -> {
+                    logger.error("Error retrieving document: ", throwable);
+                    return ResponseEntity.badRequest()
+                            .body(ApiResponse.error("Failed to retrieve document: " + throwable.getMessage()));
+                });
+
+        
+       /* return ragService.getDocument(documentId)
             .thenApply(document -> {
                 if (document != null) {
                     logger.info("Document found: {}", documentId);
@@ -81,16 +102,34 @@ public class DocumentController {
                 logger.error("Error retrieving document: ", throwable);
                 return ResponseEntity.badRequest()
                     .body(ApiResponse.error("Failed to retrieve document: " + throwable.getMessage()));
-            });
+            });*/
     }
 
     @DeleteMapping("/{documentId}")
-    public CompletableFuture<ResponseEntity<ApiResponse<String>>> deleteDocument(
+    public CompletableFuture<ResponseEntity<?>> deleteDocument(
             @PathVariable String documentId) {
         
         logger.info("Deleting document with ID: {}", documentId);
-        
         return ragService.deleteDocument(documentId)
+                .thenApply(deleted -> {
+                    if (deleted) {
+                        logger.info("Document deleted successfully: {}", documentId);
+                        return ResponseEntity.ok(ApiResponse.success("Document deleted successfully"));
+                    } else {
+                        logger.warn("Document not found for deletion: {}", documentId);
+                        return ResponseEntity.notFound().build();
+                    }
+                })
+                .exceptionally(throwable -> {
+                    logger.error("Error deleting document: ", throwable);
+                    return ResponseEntity.badRequest()
+                            .body(ApiResponse.error("Failed to delete document: " + throwable.getMessage()));
+                });
+
+
+
+        
+        /*return ragService.deleteDocument(documentId)
             .thenApply(deleted -> {
                 if (deleted) {
                     logger.info("Document deleted successfully: {}", documentId);
@@ -104,6 +143,11 @@ public class DocumentController {
                 logger.error("Error deleting document: ", throwable);
                 return ResponseEntity.badRequest()
                     .body(ApiResponse.error("Failed to delete document: " + throwable.getMessage()));
-            });
+            });*/
+
+
+
+
+
     }
 }
