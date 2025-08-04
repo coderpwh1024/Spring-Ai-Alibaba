@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: cfunction-calling-example
-
-  ai:
-    dashscope:
-      api-key:  

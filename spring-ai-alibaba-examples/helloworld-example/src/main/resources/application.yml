@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: helloworld-example
-
-  ai:
-    dashscope:
-      api-key: 
