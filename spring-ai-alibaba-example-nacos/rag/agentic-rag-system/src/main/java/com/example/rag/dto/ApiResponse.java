@@ -2,6 +2,9 @@ package com.example.rag.dto;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author coderpwh
+ */
 public class ApiResponse<T> {
     
     private boolean success;

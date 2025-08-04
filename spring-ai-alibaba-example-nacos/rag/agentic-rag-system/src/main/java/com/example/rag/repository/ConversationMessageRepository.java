@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author coderpwh
+ */
 @Repository
 public interface ConversationMessageRepository extends JpaRepository<ConversationMessage, Long> {
     

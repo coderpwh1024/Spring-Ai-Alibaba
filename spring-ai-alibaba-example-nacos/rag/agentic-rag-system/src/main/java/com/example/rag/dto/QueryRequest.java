@@ -3,6 +3,9 @@ package com.example.rag.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+/**
+ * @author coderpwh
+ */
 public class QueryRequest {
     
     @NotBlank(message = "Query cannot be empty")

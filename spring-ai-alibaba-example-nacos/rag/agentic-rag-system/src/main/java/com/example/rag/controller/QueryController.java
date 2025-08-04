@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * @author coderpwh
+ */
 @RestController
 @RequestMapping("/api/query")
 @CrossOrigin(origins = "*")

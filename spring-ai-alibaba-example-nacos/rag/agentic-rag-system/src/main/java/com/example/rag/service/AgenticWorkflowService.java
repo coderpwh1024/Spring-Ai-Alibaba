@@ -2,7 +2,6 @@ package com.example.rag.service;
 
 import com.azure.ai.openai.models.ChatCompletionsFunctionToolDefinition;
 import com.azure.ai.openai.models.ChatCompletionsFunctionToolDefinitionFunction;
-import com.azure.ai.openai.models.FunctionDefinition;
 import com.azure.core.util.BinaryData;
 import com.example.rag.model.AgenticTool;
 import com.example.rag.model.AgenticWorkflowState;
@@ -185,15 +184,6 @@ public class AgenticWorkflowService {
                     "properties", tool.getParameters(),
                     "required", tool.isRequired() ? Arrays.asList(tool.getParameters().keySet().toArray()) : Collections.emptyList()
                 ));
-                
-                /*FunctionDefinition functionDef = new FunctionDefinition(tool.getName())
-                    .setDescription(tool.getDescription())
-                    .setParameters(parametersJson);*/
-                /*FunctionDefinition functionDef = new FunctionDefinition(tool.getName())
-                        .setDescription(tool.getDescription())
-                        .setParameters(BinaryData.fromString(parametersJson));
-                       */
-
 
                 // 使用 ChatCompletionsFunctionToolDefinitionFunction 来包装 FunctionDefinition
                 ChatCompletionsFunctionToolDefinitionFunction functionDef =
