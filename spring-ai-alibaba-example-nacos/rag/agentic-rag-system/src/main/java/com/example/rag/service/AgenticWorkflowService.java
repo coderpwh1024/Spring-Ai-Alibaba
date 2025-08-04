@@ -265,8 +265,10 @@ public class AgenticWorkflowService {
     private String extractArgumentFromResponse(String response, String argumentName) {
         try {
             int start = response.indexOf(argumentName + "\":");
-            if (start == -1) return null;
-            
+            if (start == -1){
+                return null;
+            }
+
             start = response.indexOf("\"", start + argumentName.length() + 2) + 1;
             int end = response.indexOf("\"", start);
             
