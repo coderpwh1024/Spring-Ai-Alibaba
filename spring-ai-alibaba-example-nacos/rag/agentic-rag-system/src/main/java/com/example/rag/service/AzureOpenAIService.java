@@ -54,7 +54,7 @@ public class AzureOpenAIService {
                 .toFuture()
                 .thenApply(embeddings -> {
                     if (embeddings.getData() != null && !embeddings.getData().isEmpty()) {
-                        List<Double> embedding = embeddings.getData().get(0).getEmbedding();
+                        List<Float> embedding = embeddings.getData().get(0).getEmbedding();
                         return embedding.toString();
                     }
                     return "";

@@ -6,6 +6,7 @@ import co.elastic.clients.elasticsearch.core.*;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.indices.CreateIndexRequest;
 import co.elastic.clients.elasticsearch.indices.ExistsRequest;
+import co.elastic.clients.json.JsonData;
 import com.example.rag.model.Document;
 import com.example.rag.model.DocumentChunk;
 import org.slf4j.Logger;
@@ -19,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author coderpwh
+ */
 @Service
 public class ElasticsearchService {
 
@@ -130,7 +134,7 @@ public class ElasticsearchService {
                         .query(Query.of(mq -> mq.matchAll(ma -> ma)))
                         .script(sc -> sc
                             .source("cosineSimilarity(params.query_vector, 'embedding') + 1.0")
-                            .params("query_vector", queryEmbedding.toArray())
+                            .params("query_vector", JsonData.of(queryEmbedding.toArray()))
                         )
                         .minScore((float) threshold)
                     )
