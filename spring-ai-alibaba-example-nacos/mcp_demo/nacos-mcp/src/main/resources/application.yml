@@ -1,0 +1,21 @@
+server:
+  port: 9081
+
+spring:
+  application:
+    name: nacos-mcp
+  ai:
+    mcp:
+      server:
+        name: webmvc-mcp-server
+        version: 1.0.0
+        type: SYNC
+    alibaba:
+      mcp:
+        nacos:
+          server-addr: http://127.0.0.1:8848
+          namespace: f6027be6-8b32-494d-bb55-1112388383a9
+          username: nacos
+          password: nacos
+          registry:
+            enabled: true
