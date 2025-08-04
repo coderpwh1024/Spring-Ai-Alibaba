@@ -35,7 +35,7 @@ public class RedisConfig {
     @Value("${spring.data.redis.database}")
     private int database;
 
-    @Bean
+/*    @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = 
             new RedisStandaloneConfiguration(redisHost, redisPort);
@@ -47,7 +47,7 @@ public class RedisConfig {
         redisStandaloneConfiguration.setDatabase(database);
         
         return new JedisConnectionFactory(redisStandaloneConfiguration);
-    }
+    }*/
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
