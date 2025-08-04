@@ -1,7 +1,9 @@
 package com.example.rag.service;
 
 import com.azure.ai.openai.models.ChatCompletionsFunctionToolDefinition;
+import com.azure.ai.openai.models.ChatCompletionsFunctionToolDefinitionFunction;
 import com.azure.ai.openai.models.FunctionDefinition;
+import com.azure.core.util.BinaryData;
 import com.example.rag.model.AgenticTool;
 import com.example.rag.model.AgenticWorkflowState;
 import com.example.rag.model.DocumentChunk;
@@ -184,10 +186,21 @@ public class AgenticWorkflowService {
                     "required", tool.isRequired() ? Arrays.asList(tool.getParameters().keySet().toArray()) : Collections.emptyList()
                 ));
                 
-                FunctionDefinition functionDef = new FunctionDefinition(tool.getName())
+                /*FunctionDefinition functionDef = new FunctionDefinition(tool.getName())
                     .setDescription(tool.getDescription())
-                    .setParameters(parametersJson);
-                
+                    .setParameters(parametersJson);*/
+                /*FunctionDefinition functionDef = new FunctionDefinition(tool.getName())
+                        .setDescription(tool.getDescription())
+                        .setParameters(BinaryData.fromString(parametersJson));
+                       */
+
+
+                // 使用 ChatCompletionsFunctionToolDefinitionFunction 来包装 FunctionDefinition
+                ChatCompletionsFunctionToolDefinitionFunction functionDef =
+                        new ChatCompletionsFunctionToolDefinitionFunction(tool.getName())
+                                .setDescription(tool.getDescription())
+                                .setParameters(BinaryData.fromString(parametersJson));
+
                 functions.add(new ChatCompletionsFunctionToolDefinition(functionDef));
             } catch (JsonProcessingException e) {
                 logger.error("Error creating function definition for tool {}: ", tool.getName(), e);
