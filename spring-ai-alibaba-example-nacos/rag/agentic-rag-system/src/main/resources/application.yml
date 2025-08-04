@@ -7,8 +7,8 @@ spring:
   
   datasource:
     url: jdbc:mysql://localhost:3306/agentic_rag?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:password}
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     
   jpa:
@@ -22,9 +22,9 @@ spring:
         
   data:
     redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
-      password: ${REDIS_PASSWORD:}
+      host: 127.0.0.1
+      port: 6379
+      password:
       database: 0
       jedis:
         pool:
@@ -43,11 +43,11 @@ azure:
 
 # Elasticsearch Configuration
 elasticsearch:
-  host: ${ELASTICSEARCH_HOST:localhost}
-  port: ${ELASTICSEARCH_PORT:9200}
-  username: ${ELASTICSEARCH_USERNAME:}
-  password: ${ELASTICSEARCH_PASSWORD:}
-  ssl: ${ELASTICSEARCH_SSL:false}
+  host: 127.0.0.1
+  port: 9200
+  username:
+  password:
+  ssl: false
   index:
     documents: rag_documents
     conversations: rag_conversations
