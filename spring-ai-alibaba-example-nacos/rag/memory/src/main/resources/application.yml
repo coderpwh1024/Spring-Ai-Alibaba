@@ -1,0 +1,37 @@
+server:
+  port: 9006
+
+spring:
+  application:
+    name: memory
+  elasticsearch:
+    uris: http://127.0.0.1:9200
+    username:
+    password:
+  ai:
+    chat:
+      client:
+        enabled: true
+    vectorstore:
+      elasticsearch:
+#        initialize-schema: true
+        index-name: chat_memory_index
+#        dimensions: 4096
+        similarity: cosine
+        batching-strategy: TOKEN_COUNT
+
+    azure:
+      openai:
+        api-key: "xxx"
+        endpoint: "xxx"
+        chat:
+          options:
+            deployment-name: "xxx"
+        embedding:
+          enabled: true
+          metadata-mode: embed
+          options:
+            model: "x"
+            deployment-name: "x"
+
+
