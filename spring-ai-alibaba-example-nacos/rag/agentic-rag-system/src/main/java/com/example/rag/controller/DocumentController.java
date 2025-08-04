@@ -28,8 +28,7 @@ public class DocumentController {
     private RAGService ragService;
 
     @PostMapping("/upload")
-    public CompletableFuture<ResponseEntity<ApiResponse<String>>> uploadDocument(
-            @Valid @RequestBody DocumentUploadRequest request) {
+    public CompletableFuture<ResponseEntity<ApiResponse<String>>> uploadDocument(@Valid @RequestBody DocumentUploadRequest request) {
         
         logger.info("Received document upload request for source: {}", request.getSource());
         
@@ -86,23 +85,6 @@ public class DocumentController {
                     return ResponseEntity.badRequest()
                             .body(ApiResponse.error("Failed to retrieve document: " + throwable.getMessage()));
                 });
-
-        
-       /* return ragService.getDocument(documentId)
-            .thenApply(document -> {
-                if (document != null) {
-                    logger.info("Document found: {}", documentId);
-                    return ResponseEntity.ok(ApiResponse.success(document));
-                } else {
-                    logger.warn("Document not found: {}", documentId);
-                    return ResponseEntity.notFound().build();
-                }
-            })
-            .exceptionally(throwable -> {
-                logger.error("Error retrieving document: ", throwable);
-                return ResponseEntity.badRequest()
-                    .body(ApiResponse.error("Failed to retrieve document: " + throwable.getMessage()));
-            });*/
     }
 
     @DeleteMapping("/{documentId}")
@@ -125,29 +107,6 @@ public class DocumentController {
                     return ResponseEntity.badRequest()
                             .body(ApiResponse.error("Failed to delete document: " + throwable.getMessage()));
                 });
-
-
-
-        
-        /*return ragService.deleteDocument(documentId)
-            .thenApply(deleted -> {
-                if (deleted) {
-                    logger.info("Document deleted successfully: {}", documentId);
-                    return ResponseEntity.ok(ApiResponse.success("Document deleted successfully"));
-                } else {
-                    logger.warn("Document not found for deletion: {}", documentId);
-                    return ResponseEntity.notFound().build();
-                }
-            })
-            .exceptionally(throwable -> {
-                logger.error("Error deleting document: ", throwable);
-                return ResponseEntity.badRequest()
-                    .body(ApiResponse.error("Failed to delete document: " + throwable.getMessage()));
-            });*/
-
-
-
-
 
     }
 }

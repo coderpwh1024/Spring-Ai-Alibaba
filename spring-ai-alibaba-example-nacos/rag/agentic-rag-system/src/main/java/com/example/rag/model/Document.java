@@ -2,6 +2,7 @@ package com.example.rag.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Map;
 /**
  * @author coderpwh
  */
-public class Document {
+public class Document implements Serializable {
     
     @JsonProperty("id")
     private String id;

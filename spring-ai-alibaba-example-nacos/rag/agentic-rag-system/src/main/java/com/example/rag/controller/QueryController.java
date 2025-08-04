@@ -31,8 +31,7 @@ public class QueryController {
     private AgenticWorkflowService agenticWorkflowService;
 
     @PostMapping
-    public CompletableFuture<ResponseEntity<ApiResponse<String>>> query(
-            @Valid @RequestBody QueryRequest request) {
+    public CompletableFuture<ResponseEntity<ApiResponse<String>>> query(@Valid @RequestBody QueryRequest request) {
         
         String sessionId = request.getSessionId() != null ? request.getSessionId() : UUID.randomUUID().toString();
         logger.info("Processing query for session {}: {}", sessionId, request.getQuery());

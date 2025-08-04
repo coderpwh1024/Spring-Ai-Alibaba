@@ -41,6 +41,14 @@ public class RAGService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+
+    /***
+     *
+     * 创建索引
+     * @param content
+     * @param source
+     * @return
+     */
     public CompletableFuture<String> processDocument(String content, String source) {
         return CompletableFuture.supplyAsync(() -> {
             try {

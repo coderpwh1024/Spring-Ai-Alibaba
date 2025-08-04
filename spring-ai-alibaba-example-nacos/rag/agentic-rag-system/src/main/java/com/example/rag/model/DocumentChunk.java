@@ -2,13 +2,14 @@ package com.example.rag.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author coderpwh
  */
-public class DocumentChunk {
+public class DocumentChunk implements Serializable {
     
     @JsonProperty("chunk_id")
     private String chunkId;
