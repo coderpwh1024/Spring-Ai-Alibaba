@@ -1,0 +1,12 @@
+server:
+  port: 5089
+
+spring:
+  application:
+    name: product-analysis-graph
+  ai:
+    dashscope:
+      api-key: sk-4a8abddd743346fa91f1408e7f73daad
+      chat:
+        options:
+          model: qwen-max

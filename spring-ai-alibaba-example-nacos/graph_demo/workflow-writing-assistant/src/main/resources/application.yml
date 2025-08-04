@@ -1,0 +1,13 @@
+server:
+  port: 6071
+
+spring:
+  application:
+    name: spring-ai-alibaba-graph-example
+
+  ai:
+    dashscope:
+      api-key:
+      chat:
+        options:
+          model: qwen-plus
