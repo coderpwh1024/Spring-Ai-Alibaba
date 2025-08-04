@@ -3,6 +3,7 @@ package com.example.rag.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -30,17 +31,17 @@ public class Document {
     private String source;
     
     @JsonProperty("created_at")
-    private LocalDateTime createdAt;
+    private Date createdAt;
     
     @JsonProperty("updated_at")
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
     
     @JsonProperty("embedding")
     private List<Double> embedding;
 
     public Document() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.createdAt =  new Date();
+        this.updatedAt =  new Date();
     }
 
     public Document(String id, String title, String content, String source) {
@@ -99,19 +100,19 @@ public class Document {
         this.source = source;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Date  getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Date  createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Date  getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Date  updatedAt) {
         this.updatedAt = updatedAt;
     }
 

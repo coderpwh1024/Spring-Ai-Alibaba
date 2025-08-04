@@ -6,7 +6,6 @@ spring:
     name: agentic-rag-system
   
   datasource:
-    #    url: jdbc:mysql://localhost:3306/agentic_rag?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     url: jdbc:mysql://localhost:3306/agentic_rag?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
     username: root
     password: root123456
@@ -37,10 +36,10 @@ spring:
 # Azure OpenAI Configuration
 azure:
   openai:
-    endpoint: ${AZURE_OPENAI_ENDPOINT:https://your-resource.openai.azure.com/}
-    api-key: ${AZURE_OPENAI_API_KEY:your-api-key}
-    deployment-name: ${AZURE_OPENAI_DEPLOYMENT:gpt-4}
-    api-version: ${AZURE_OPENAI_API_VERSION:2024-02-15-preview}
+    endpoint:
+    api-key:
+    deployment-name:
+    api-version: 2024-08-01-preview
 
 # Elasticsearch Configuration
 elasticsearch:
