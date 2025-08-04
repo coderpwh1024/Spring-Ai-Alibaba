@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f47255e8-1383-4702-81de-37073420618c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/src/main/java/com/coderpwh/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/src/main/java/com/coderpwh/work/ChainWorkflow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chain-workflow/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/.idea/eclipseCodeFormatter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/src/main/java/com/coderpwh/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/src/main/java/com/coderpwh/work/EvaluatorOptimizer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../evaluator-optimizer/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/controller/ParallelController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/controller/WritingAssistantController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/graph/conf/ParallelGraphConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/graph/conf/WritingAssistantAutoconfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/graph/dispatcher/FeedbackDispatcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/graph/node/RewordingNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/graph/node/SummarizerNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/graph/node/SummaryFeedbackClassifierNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/java/com/coderpwh/graph/node/TitleGeneratorNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../graph/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/src/main/java/com/coderpwh/HumanNodeApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/src/main/java/com/coderpwh/config/GraphHumanConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/src/main/java/com/coderpwh/controller/GraphHumanController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/src/main/java/com/coderpwh/controller/GraphProcess/GraphProcess.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/src/main/java/com/coderpwh/dispatcher/HumanFeedbackDispatcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/src/main/java/com/coderpwh/node/ExpanderNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/src/main/java/com/coderpwh/node/HumanFeedbackNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/src/main/java/com/coderpwh/node/TranslateNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../human-node/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-stremable-client/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-stremable-client/src/main/java/com/coderpwh/autoconfigure/StreamableHttpClientTransportAutoConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-stremable-client/src/main/java/com/coderpwh/autoconfigure/properties/McpStreamableClientProperties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-stremable-client/src/main/java/com/coderpwh/io/modelcontextprotocol/client/McpAsyncClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-stremable-client/src/main/java/com/coderpwh/io/modelcontextprotocol/client/transport/StreamableHttpClientTransport.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-stremable-client/src/main/java/com/coderpwh/io/modelcontextprotocol/spec/McpClientSession.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-stremable-client/src/main/java/com/coderpwh/mcp/streamble/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-stremable-client/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-stremable-client/src/main/resources/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-webflux-client/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-webflux-client/src/main/java/com/coderpwh/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/mcp-webflux-client/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/starter-default-client/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/starter-default-client/src/main/java/com/coderpwh/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/starter-default-client/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/client/starter-default-client/src/main/resources/mcp-servers-config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/dog-stdio-server/.flattened-pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/dog-stdio-server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/dog-stdio-server/src/main/java/com/coderpwh/DogApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/dog-stdio-server/src/main/java/com/coderpwh/service/DogService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/dog-stdio-server/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-stdio-server/.flattened-pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-stdio-server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-stdio-server/src/main/java/com/coderpwh/McpServerApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-stdio-server/src/main/java/com/coderpwh/service/OpenMeteoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-stdio-server/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-stock-server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-stock-server/src/main/java/com/coderpwh/StockServerApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-stock-server/src/main/java/com/coderpwh/service/StockService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-stock-server/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-webflux-server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-webflux-server/src/main/java/com/coderpwh/McpServerApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-webflux-server/src/main/java/com/coderpwh/controller/OpenMeteoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-webflux-server/src/main/java/com/coderpwh/service/OpenMeteoService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-webflux-server/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-webflux-server/src/test/java/com/coderpwh/ClientSse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-webflux-server/src/test/java/com/coderpwh/ClientStdio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mcp/start/server/starter-webflux-server/src/test/java/com/coderpwh/SampleClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/MemoryApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/common/config/AzureConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/common/config/AzureOpenAiConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/common/config/ElasticsearchVectorStoreConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/controller/EmbeddingController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/controller/GetEmbeddingsSample.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/controller/MemoryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/entity/request/ElasticSearchRequestDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/entity/request/MetadataRequestDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/entity/request/VectorStoreMapRequestDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/entity/request/VectorStoreRequestDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/service/AzureElasticSearchService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/service/AzureOpenAiService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/service/impl/AzureElasticSearchServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/service/impl/AzureOpenAiServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/java/com/coderpwh/service/impl/MessageChatMemoryServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/resources/bootstrap-qa.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memory/src/main/resources/bootstrap.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/.idea/eclipseCodeFormatter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/src/main/java/com/coderpwh/RagApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/src/main/java/com/coderpwh/config/PromptConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/src/main/java/com/coderpwh/config/VectorDataInit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/src/main/java/com/coderpwh/controller/RagController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../milvus-rag/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp-client/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp-client/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp-client/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp-client/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp-client/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp-client/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp-client/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp-client/src/main/java/com/coderpwh/NacosMcpSseClientApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp-client/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/src/main/java/com/coderpwh/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/src/main/java/com/coderpwh/service/WeatherService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos-mcp/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos/.idea/eclipseCodeFormatter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nacos/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../nacos/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/src/main/java/com/coderpwh/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/src/main/java/com/coderpwh/work/OrchestratorWorkers.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../orchestrator-workers/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgvector/src/main/java/com/coderpwh/RagExampleApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgvector/src/main/resources/bootstrap-qa.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgvector/src/main/resources/bootstrap.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/.idea/eclipseCodeFormatter.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/src/main/java/com/coderpwh/ProductAnalysisApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/src/main/java/com/coderpwh/conf/ProductGraphConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/src/main/java/com/coderpwh/controller/ProductController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/src/main/java/com/coderpwh/model/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-analysis-graph/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/RagExampleApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/configuration/RagConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/controller/CloudRagController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/controller/LocalRagController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/controller/MemoryRagController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/reader/JsonReader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/service/MemoryRagService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/service/RagService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/service/impl/CloudRagService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/service/impl/LocalRagService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/java/com/coderpwh/service/impl/MemoryRagServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/resources/bootstrap-qa.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/resources/bootstrap.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/resources/data/bikes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/resources/data/spring_ai_alibaba_quickstart.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rag-example/src/main/resources/prompts/system-qa.st" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/src/main/java/com/coderpwh/ReflectionApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/src/main/java/com/coderpwh/config/RelectionAutoconfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/src/main/java/com/coderpwh/controller/ReflectionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reflection/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/.idea/smartfox_info.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/src/main/java/com/coderpwh/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/src/main/java/com/coderpwh/work/RoutingResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/src/main/java/com/coderpwh/work/RoutingWorkflow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routing-workflow/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/java/com/coderpwh/PromptExampleApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/java/com/coderpwh/controller/RoleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/java/com/coderpwh/controller/StuffController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/java/com/coderpwh/controller/TestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/java/com/coderpwh/entity/Completion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/resources/1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/resources/bootstrap-qa.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/resources/bootstrap.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/resources/data/bikes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/resources/docs/wikipedia-curling.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/resources/prompts/joke-prompt.st" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/resources/prompts/qa-prompt.st" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/resources/prompts/system-message.st" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-ai-alibaba-prompt-example/src/main/resources/prompts/system-qa.st" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/coderpwh/StreamNodeApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/coderpwh/config/GraphNodeStreamConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/coderpwh/controller/GraphProcess/GraphProcess.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/coderpwh/controller/GraphStreamController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/coderpwh/node/ExpanderNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/src/main/java/com/coderpwh/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/src/main/java/com/coderpwh/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/src/main/java/com/coderpwh/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/src/main/java/com/coderpwh/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/src/main/java/com/coderpwh/service/iml/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webFlux/src/main/resources/application.properties" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="$USER_HOME$/maven" />
+        <option name="localRepository" value="$USER_HOME$/maven-repo" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+        <option name="userSettingsFile" value="$USER_HOME$/maven/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2z4Yo2lct4G5NVoyAperiildkTQ" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.StreamNodeApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/coderpwh/workSpace/Spring-Ai-Alibaba/spring-ai-alibaba-example-nacos/stream-node&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="StreamNodeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="stream-node" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.coderpwh.StreamNodeApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f47255e8-1383-4702-81de-37073420618c" name="Changes" comment="" />
+      <created>1750991984990</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1750991984990</updated>
+      <workItem from="1750991986188" duration="9930000" />
+      <workItem from="1752477869650" duration="240000" />
+      <workItem from="1752478144414" duration="732000" />
+      <workItem from="1753150735222" duration="1785000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
