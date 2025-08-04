@@ -52,7 +52,7 @@ public class AzureOpenAIService {
     public CompletableFuture<String> generateEmbedding(String text) {
         EmbeddingsOptions embeddingsOptions = new EmbeddingsOptions(List.of(text));
         
-        return openAIAsyncClient.getEmbeddings("text-embedding-ada-002", embeddingsOptions)
+        return openAIAsyncClient.getEmbeddings("text-embedding-3-large", embeddingsOptions)
                 .toFuture()
                 .thenApply(embeddings -> {
                     if (embeddings.getData() != null && !embeddings.getData().isEmpty()) {

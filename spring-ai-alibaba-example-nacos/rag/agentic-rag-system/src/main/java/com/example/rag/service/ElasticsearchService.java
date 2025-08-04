@@ -56,7 +56,7 @@ public class ElasticsearchService {
                 .mappings(m -> m
                     .properties("content", p -> p.text(t -> t.analyzer("standard")))
                     .properties("title", p -> p.text(t -> t.analyzer("standard")))
-                    .properties("embedding", p -> p.denseVector(d -> d.dims(1536)))
+                    .properties("embedding", p -> p.denseVector(d -> d.dims(	3072)))
                     .properties("created_at", p -> p.date(d -> d))
                     .properties("updated_at", p -> p.date(d -> d))
                 )
