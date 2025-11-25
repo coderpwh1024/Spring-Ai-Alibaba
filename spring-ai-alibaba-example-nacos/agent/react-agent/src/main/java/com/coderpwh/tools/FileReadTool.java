@@ -17,6 +17,7 @@ import java.nio.file.Path;
 public class FileReadTool implements Tool<FileReadTool.Request, String> {
 
 
+    @Override
     public ToolCallback toolCallback(){
         return FunctionToolCallback.builder("file_read",this)
                 .description("Tool for read files.")
