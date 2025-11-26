@@ -4,13 +4,17 @@ import com.alibaba.cloud.ai.graph.agent.ReactAgent;
 import com.alibaba.cloud.ai.graph.agent.hook.hip.HumanInTheLoopHook;
 import com.alibaba.cloud.ai.graph.checkpoint.savers.MemorySaver;
 import com.alibaba.cloud.ai.graph.exception.GraphStateException;
+import com.coderpwh.interceptor.LogToolInterceptor;
 import com.coderpwh.tools.FileReadTool;
 import com.coderpwh.tools.FileWriteTool;
 import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author coderpwh
  */
+@Configuration
 public class AgentConfiguration {
 
 
@@ -22,8 +26,9 @@ public class AgentConfiguration {
     }
 
 
-   /* public ReactAgent reactAgent() throws GraphStateException {
-        return  ReactAgent
+    @Bean
+    public ReactAgent reactAgent() throws GraphStateException {
+        return ReactAgent
                 .builder()
                 .name("agent")
                 .description("This is a react agent")
@@ -34,13 +39,9 @@ public class AgentConfiguration {
                         new FileWriteTool().toolCallback()
                 ).hooks(HumanInTheLoopHook.builder().approvalOn("file_write", "Write File should be approved")
                         .build())
-                .interceptors()
-
-
+                .interceptors(new LogToolInterceptor())
+                .build();
     }
-*/
-
-
 
 
 }
